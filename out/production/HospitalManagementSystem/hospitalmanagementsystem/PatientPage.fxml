@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="355.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospitalmanagementsystem.PatientPageController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <AnchorPane fx:id="login_form" prefHeight="650.4" prefWidth="355.2" stylesheets="@../design/PageDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="120.0" fitWidth="230.0" layoutX="91.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/1%20(31).jpeg" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="104.0" layoutY="110.0" prefHeight="36.0" prefWidth="134.0" text="Login Account">
+                     <font>
+                        <Font name="Tahoma" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="125.0" layoutY="146.0" prefHeight="18.0" prefWidth="104.0" text="Patient Portal" />
+                  <TextField fx:id="login_patientID" layoutX="45.0" layoutY="191.0" onAction="#loginAccount" prefHeight="30.0" prefWidth="250.0" promptText="Patient ID" stylesheets="@../design/PageDesign.css">
+                     <styleClass>
+                        <String fx:value="textfield-3" />
+                        <String fx:value="white-bg" />
+                     </styleClass></TextField>
+                  <PasswordField fx:id="login_password" layoutX="46.0" layoutY="235.0" onAction="#loginAccount" prefHeight="30.0" prefWidth="250.0" promptText="password">
+                     <styleClass>
+                        <String fx:value="textfield-1" />
+                        <String fx:value="white-bg" />
+                     </styleClass>
+                  </PasswordField>
+                  <TextField fx:id="login_ShowPassword" layoutX="46.0" layoutY="235.0" onAction="#loginAccount" prefHeight="30.0" prefWidth="250.0" promptText="password">
+                     <styleClass>
+                        <String fx:value="textfield-3" />
+                        <String fx:value="white-bg" />
+                     </styleClass>
+                  </TextField>
+                  <CheckBox fx:id="login_CheckBox" layoutX="46.0" layoutY="280.0" mnemonicParsing="false" onAction="#loginShowPassword" text="show password" />
+                  <Button fx:id="login_loginBtn" layoutX="46.0" layoutY="319.0" mnemonicParsing="false" onAction="#loginAccount" prefHeight="36.0" prefWidth="250.0" text="Login">
+                     <styleClass>
+                        <String fx:value="btn-3" />
+                        <String fx:value="radius" />
+                     </styleClass>
+                  </Button>
+                  <ImageView fitHeight="140.0" fitWidth="200.0" layoutX="99.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/1%20(26).jpeg" />
+                     </image>
+                  </ImageView>
+                  <ComboBox fx:id="login_user" layoutX="94.0" layoutY="539.0" onAction="#switchPage" prefHeight="30.0" prefWidth="150.0" promptText="Select User" stylesheets="@../design/PageDesign.css" />
+               </children>
+               <styleClass>
+                  <String fx:value="white-bg" />
+                  <String fx:value="radius" />
+               </styleClass>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
