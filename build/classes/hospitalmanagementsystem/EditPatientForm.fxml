@@ -35,7 +35,7 @@
                         </Label>
                         <ImageView fitHeight="26.0" fitWidth="37.0" layoutX="139.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../Images/edit%20(1).png" />
+                                <Image url="@../Images/image%20(35).png" />
                             </image>
                         </ImageView>
                         <Label layoutX="42.0" layoutY="87.0" prefHeight="18.0" prefWidth="66.0" styleClass="shadow" text="Patient ID" />

@@ -70,18 +70,12 @@
                               <String fx:value="shadow" />
                            </styleClass>
                         </Label>
-                        <Button fx:id="logout_btn" layoutX="857.0" layoutY="16.0" mnemonicParsing="false" onAction="#logoutBtn" prefHeight="28.0" prefWidth="102.0" styleClass="btn-3" stylesheets="@../design/PatientMainFormDesign.css" text="Deconnexion" AnchorPane.rightAnchor="148.0" />
                      </children>
                   </AnchorPane>
                </top>
                <left>
                   <AnchorPane prefHeight="639.0" prefWidth="170.0" styleClass="bg-color-1" stylesheets="@../design/MainFormDesign.css" BorderPane.alignment="CENTER">
                      <children>
-                        <ImageView fitHeight="164.0" fitWidth="161.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="47.0">
-                           <image>
-                              <Image url="@../Images/image%20(36).png" />
-                           </image>
-                        </ImageView>
                         <ImageView fitHeight="96.0" fitWidth="103.0" layoutX="33.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Images/image%20(22).png" />
@@ -103,7 +97,7 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Button fx:id="dashboard_btn" defaultButton="true" layoutX="7.0" layoutY="212.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="161.0" styleClass="nav-btn-1" stylesheets="@../design/MainFormDesign.css" text="Tableau de bord" textFill="#fffcfc">
+                        <Button fx:id="dashboard_btn" defaultButton="true" layoutX="9.0" layoutY="212.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="161.0" styleClass="nav-btn-1" stylesheets="@../design/MainFormDesign.css" text="Tableau de bord" textFill="#fffcfc">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -111,7 +105,7 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button fx:id="doctors_btn" layoutX="7.0" layoutY="258.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="44.0" prefWidth="161.0" styleClass="nav-btn-1" stylesheets="@../design/MainFormDesign.css" text=" Docteurs">
+                        <Button fx:id="doctors_btn" layoutX="9.0" layoutY="258.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="44.0" prefWidth="161.0" styleClass="nav-btn-1" stylesheets="@../design/MainFormDesign.css" text=" Docteurs">
                            <graphic>
                               <ImageView fitHeight="34.0" fitWidth="32.0" pickOnBounds="true">
                                  <image>
@@ -119,7 +113,7 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button fx:id="patients_btn" layoutX="6.0" layoutY="309.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="41.0" prefWidth="161.0" styleClass="nav-btn-1" stylesheets="@../design/MainFormDesign.css" text=" Patients">
+                        <Button fx:id="patients_btn" layoutX="9.0" layoutY="309.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="41.0" prefWidth="161.0" styleClass="nav-btn-1" stylesheets="@../design/MainFormDesign.css" text=" Patients">
                            <graphic>
                               <ImageView fitHeight="31.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -127,7 +121,7 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button fx:id="appointments_btn" layoutX="6.0" layoutY="360.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="41.0" prefWidth="161.0" styleClass="nav-btn-1" stylesheets="@../design/MainFormDesign.css" text="Rendez-vous">
+                        <Button fx:id="appointments_btn" layoutX="9.0" layoutY="360.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="41.0" prefWidth="161.0" styleClass="nav-btn-1" stylesheets="@../design/MainFormDesign.css" text="Rendez-vous">
                            <graphic>
                               <ImageView fitHeight="31.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -135,14 +129,14 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button fx:id="payement_btn" layoutX="7.0" layoutY="413.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="160.0" styleClass="nav-btn-1" stylesheets="@../design/MainFormDesign.css" text="          Payement" />
+                        <Button fx:id="payement_btn" layoutX="9.0" layoutY="413.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="160.0" styleClass="nav-btn-1" stylesheets="@../design/MainFormDesign.css" text="          Payement" />
                         <ImageView fitHeight="31.0" fitWidth="34.0" layoutX="14.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Images/image%20(59).png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="profile_btn" layoutX="4.0" layoutY="511.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="163.0" styleClass="nav-btn-1" stylesheets="@../design/MainFormDesign.css" text="             Parametres" />
-                        <ImageView fitHeight="31.0" fitWidth="34.0" layoutX="10.0" layoutY="513.0" pickOnBounds="true" preserveRatio="true">
+                        <Button fx:id="profile_btn" layoutX="8.0" layoutY="511.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="163.0" styleClass="nav-btn-1" stylesheets="@../design/MainFormDesign.css" text="             Parametres" />
+                        <ImageView fitHeight="31.0" fitWidth="34.0" layoutX="14.0" layoutY="513.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Images/image%20(69).png" />
                            </image>
@@ -162,6 +156,17 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
+                        <Button fx:id="logout_btn" layoutX="7.0" layoutY="564.0" mnemonicParsing="false" onAction="#logoutBtn" prefHeight="48.0" prefWidth="162.0" text="           Deconnexion" textFill="#0900ff" AnchorPane.bottomAnchor="27.0">
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="radius" />
+                              <String fx:value="white-bg" />
+                           </styleClass></Button>
+                        <ImageView fitHeight="37.0" fitWidth="48.0" layoutX="11.0" layoutY="570.0" pickOnBounds="true" AnchorPane.bottomAnchor="32.0">
+                           <image>
+                              <Image url="@../Images/logout.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
                </left>
@@ -257,7 +262,7 @@
                                           <String fx:value="white-bg" />
                                        </styleClass>
                                        <children>
-                                          <AreaChart fx:id="dashboad_chart_PD" layoutX="-106.0" layoutY="0.8" prefHeight="217.0" prefWidth="431.0" title="Donnees Patients" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
+                                          <AreaChart fx:id="dashboad_chart_PD" layoutX="-106.0" layoutY="0.8" prefHeight="217.0" prefWidth="431.0" styleClass="bg-color-1" title="Donnees Patients" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
                                             <xAxis>
                                               <CategoryAxis side="BOTTOM" />
                                             </xAxis>
@@ -274,7 +279,7 @@
                                           <String fx:value="white-bg" />
                                        </styleClass>
                                        <children>
-                                          <BarChart fx:id="dashboad_chart_DD" layoutX="-69.0" prefHeight="215.0" prefWidth="431.0" title="Donnees Docteurs" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <BarChart fx:id="dashboad_chart_DD" layoutX="-69.0" prefHeight="215.0" prefWidth="431.0" styleClass="bg-color-1" title="Donnees Docteurs" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <xAxis>
                                               <CategoryAxis side="BOTTOM" />
                                             </xAxis>

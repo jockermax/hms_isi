@@ -27,7 +27,7 @@ public class HospitalManagementSystem extends Application {
         stage.setMinHeight(650);
         stage.setTitle("Gestion de Rendez vous hopital");
         stage.setScene(scene);
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("image.jpeg")));
+     //   stage.getIcons().add(new Image(getClass().getResourceAsStream("image.jpeg")));
         stage.show();
     }
 

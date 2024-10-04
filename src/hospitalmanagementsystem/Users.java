@@ -10,5 +10,5 @@ package hospitalmanagementsystem;
  * @author DELL
  */
 public class Users {
-    static String[] user= {"Admin portal","Doctor Portal","Patient portal"};
+    static String[] user= {"Admin portal","Doctor Portal"};
 }

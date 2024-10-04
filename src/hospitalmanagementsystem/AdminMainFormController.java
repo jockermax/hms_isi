@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,6 +38,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -50,6 +53,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -320,6 +324,9 @@ public class AdminMainFormController implements Initializable {
 
     @FXML
     private Button logout_btn;
+
+    @FXML
+    private HBox hboxdate;
 
     // LES OUTILS DE LA BASE DE DONNEES
     private Connection connect;
@@ -1402,27 +1409,64 @@ public class AdminMainFormController implements Initializable {
 
     }
 
+//    public void runTime() {
+//        new Thread() {
+//
+//            public void run() {
+//                SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+//                while (true) {
+//                    try {
+//
+//                        Thread.sleep(1000); // 1000 ms = 1s
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                    Platform.runLater(() -> {
+//                        date_time.setText(format.format(new Date()));
+//                    });
+//                }
+//            }
+//        }.start();
+//
+//    }
+   
     public void runTime() {
         new Thread() {
-
             public void run() {
                 SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+
+                // Timeline pour le défilement
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(500), event -> {
+                    // Met à jour le texte de l'horloge
+                    String currentTime = format.format(new Date());
+                    date_time.setText(currentTime);
+                    
+                    // Défilement du texte
+                    double width = date_time.getLayoutBounds().getWidth();
+                    date_time.setTranslateX(date_time.getTranslateX() - 10); // Ajustez la valeur pour la vitesse du défilement
+                    
+                    // Reset du positionnement quand le texte est complètement sorti de l'écran
+                    if (date_time.getTranslateX() < -width) {
+                        date_time.setTranslateX(800); // Remplacez 800 par la largeur de votre fenêtre
+                    }
+                }));
+
+                // Démarre le Timeline pour qu'il s'exécute chaque seconde
+                timeline.setCycleCount(Timeline.INDEFINITE);
+                timeline.play();
+
+                // Boucle pour garder le thread en vie
                 while (true) {
                     try {
-
                         Thread.sleep(1000); // 1000 ms = 1s
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
-                    Platform.runLater(() -> {
-                        date_time.setText(format.format(new Date()));
-                    });
                 }
             }
         }.start();
-
     }
 
     @Override

@@ -25,9 +25,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,6 +57,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  *
@@ -314,6 +318,12 @@ public class DoctorMainFormController implements Initializable {
     @FXML
     private Button profile_updateBtn;
 
+    @FXML
+    private Button Btn_search_rv;
+
+    @FXML
+    private TextField search_rv;
+
 //    DATABASE TOOLSs
     private Connection connect;
     private PreparedStatement prepare;
@@ -324,6 +334,11 @@ public class DoctorMainFormController implements Initializable {
     private final AlertMessage tray = new AlertMessage();
     private Integer appointmentID;
 
+//    ObservableList<AppointmentData> seachrvModelObservableList = FXCollections.observableArrayList();
+//  
+//    public void searchRv() {
+//       
+//    }
     public void dashboardDisplayIP() {
         String sql = "SELECT COUNT(id) FROM patient WHERE status = 'Inactive' AND doctor = '"
                 + Data.doctor_id + "'";
@@ -1203,30 +1218,49 @@ public class DoctorMainFormController implements Initializable {
     }
 
     public void runTime() {
-
         new Thread() {
-
             public void run() {
-
                 SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+
+                // Timeline pour le défilement
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(500), event -> {
+                    // Met à jour le texte de l'horloge
+                    String currentTime = format.format(new Date());
+                    date_time.setText(currentTime);
+                    
+                    // Défilement du texte
+                    double width = date_time.getLayoutBounds().getWidth();
+                    date_time.setTranslateX(date_time.getTranslateX() - 10); // Ajustez la valeur pour la vitesse du défilement
+                    
+                    // Reset du positionnement quand le texte est complètement sorti de l'écran
+                    if (date_time.getTranslateX() < -width) {
+                        date_time.setTranslateX(1000); // Remplacez 800 par la largeur de votre fenêtre
+                    }
+                }));
+
+                // Démarre le Timeline pour qu'il s'exécute chaque seconde
+                timeline.setCycleCount(Timeline.INDEFINITE);
+                timeline.play();
+
+                // Boucle pour garder le thread en vie
                 while (true) {
                     try {
                         Thread.sleep(1000); // 1000 ms = 1s
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
-                    Platform.runLater(() -> {
-                        date_time.setText(format.format(new Date()));
-                    });
                 }
             }
         }.start();
     }
 
+//    private ObservableList<AppointmentData> appointmentListrv = FXCollections.observableArrayList();
+//    private FilteredList<AppointmentData> filteredAppointments;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+       
         displayAdminIdNumberName();
         runTime();
 

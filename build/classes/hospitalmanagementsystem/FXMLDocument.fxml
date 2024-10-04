@@ -12,14 +12,16 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="862.0" prefWidth="1841.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospitalmanagementsystem.FXMLDocumentController">
     <children>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+        <AnchorPane prefHeight="862.0" prefWidth="1809.0">
             <children>
-                <AnchorPane fx:id="login_form" layoutX="28.0" prefHeight="800.0" prefWidth="500.0" styleClass="white-bg" stylesheets="@../design/PageDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="-28.0" AnchorPane.topAnchor="0.0">
+                <AnchorPane fx:id="login_form" layoutX="-2.0" prefHeight="862.0" prefWidth="1841.0" styleClass="white-bg" stylesheets="@../design/PageDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
+                  <Polygon fill="#097ea4" layoutX="415.0" layoutY="46.0" points="-416.0, 358.0, -416.0, -46.0, -70.0, -46.0" stroke="BLACK" strokeType="INSIDE" styleClass="btn-1" />
                   <ImageView fitHeight="813.0" fitWidth="723.0" layoutX="738.0" layoutY="25.0" pickOnBounds="true" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="340.0" AnchorPane.topAnchor="25.0">
                      <image>
                         <Image url="@../Images/babette.png" />
@@ -54,27 +56,30 @@
                                 <String fx:value="radius" />
                             </styleClass>
                         </Button>
-                        <ComboBox fx:id="login_user" layoutX="373.0" layoutY="614.0" onAction="#switchPage" prefHeight="30.0" prefWidth="192.0" promptText="Choisir un utilisateur" stylesheets="@../design/PageDesign.css" AnchorPane.rightAnchor="1276.0" />
+                        <ComboBox fx:id="login_user" layoutX="373.0" layoutY="614.0" onAction="#switchPage" prefHeight="30.0" prefWidth="192.0" promptText="Vous etes" stylesheets="@../design/PageDesign.css" AnchorPane.rightAnchor="1276.0" />
                         <Label layoutX="317.0" layoutY="713.0" prefHeight="18.0" prefWidth="171.0" text="Pas encore de compte" AnchorPane.rightAnchor="1353.0" />
-                        <Hyperlink fx:id="login_registerHere" layoutX="499.0" layoutY="709.0" onAction="#switchForm" prefHeight="26.0" prefWidth="66.0" text="Creez ici" AnchorPane.rightAnchor="1276.0" />
+                        <Hyperlink fx:id="login_registerHere" layoutX="499.0" layoutY="709.0" onAction="#switchForm" prefHeight="26.0" prefWidth="66.0" styleClass="btn-1" text="Creez ici" AnchorPane.rightAnchor="1276.0" />
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="register_form" layoutX="8.0" prefHeight="650.4" prefWidth="355.2" styleClass="white-bg" stylesheets="@../design/PageDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="-7.2000000000000455">
+                <AnchorPane fx:id="register_form" layoutX="8.0" prefHeight="862.0" prefWidth="1841.0" styleClass="white-bg" stylesheets="@../design/PageDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                  <ImageView fitHeight="491.0" fitWidth="333.0" layoutX="10.0" layoutY="98.0" pickOnBounds="true">
+                  <ImageView fitHeight="813.0" fitWidth="1054.0" layoutX="705.0" layoutY="35.0" pickOnBounds="true" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="82.0" AnchorPane.topAnchor="35.0">
                      <image>
-                        <Image url="@../Images/image%20(49).png" />
+                        <Image url="@../Images/image(11).jpeg" />
                      </image>
                   </ImageView>
-                        <Label layoutX="68.0" layoutY="14.0" prefHeight="36.0" prefWidth="219.0" stylesheets="@../design/PageDesign.css" text="Creation de compte" textFill="#000b2e">
+                        <Label layoutX="340.0" layoutY="89.0" prefHeight="39.0" prefWidth="329.0" stylesheets="@../design/PageDesign.css" text="Creation de compte" textFill="#000b2e">
                             <font>
-                                <Font name="Tahoma" size="20.0" />
+                                <Font name="Tahoma" size="31.0" />
                             </font>
                         </Label>
-                        <Label layoutX="125.0" layoutY="56.0" prefHeight="21.0" prefWidth="113.0" text="Portail admin" textFill="#000b2e" />
-                        <TextField fx:id="register_email" layoutX="44.0" layoutY="220.0" prefHeight="30.0" prefWidth="250.0" promptText="Email Address" styleClass="textfield-1" stylesheets="@../design/PageDesign.css" />
-                        <TextField fx:id="register_username" layoutX="44.0" layoutY="257.0" prefHeight="30.0" prefWidth="250.0" promptText="username" styleClass="textfield-1" stylesheets="@../design/PageDesign.css" />
-                        <PasswordField fx:id="register_password" layoutX="44.0" layoutY="294.0" prefHeight="30.0" prefWidth="250.0" promptText="password">
+                        <Label layoutX="375.0" layoutY="140.0" prefHeight="21.0" prefWidth="113.0" text="admin" textFill="#000b2e">
+                     <font>
+                        <Font size="24.0" />
+                     </font></Label>
+                        <TextField fx:id="register_email" layoutX="331.0" layoutY="223.0" prefHeight="52.0" prefWidth="356.0" promptText="Email Address" styleClass="textfield-1" stylesheets="@../design/PageDesign.css" />
+                        <TextField fx:id="register_username" layoutX="331.0" layoutY="293.0" prefHeight="52.0" prefWidth="356.0" promptText="username" styleClass="textfield-1" stylesheets="@../design/PageDesign.css" />
+                        <PasswordField fx:id="register_password" layoutX="331.0" layoutY="365.0" prefHeight="52.0" prefWidth="356.0" promptText="password">
                             <styleClass>
                                 <String fx:value="textfield-1" />
                                 <String fx:value="white-bg" />
@@ -86,20 +91,24 @@
                                 <String fx:value="white-bg" />
                             </styleClass>
                         </TextField>
-                        <CheckBox fx:id="register_CheckBox" layoutX="46.0" layoutY="341.0" mnemonicParsing="false" onAction="#registerShowPassword" styleClass="btn-1" text="Montrer le mot de passe">
+                        <CheckBox fx:id="register_CheckBox" layoutX="347.0" layoutY="442.0" mnemonicParsing="false" onAction="#registerShowPassword" prefHeight="21.0" prefWidth="192.0" styleClass="btn-1" text="Montrer le mot de passe">
                      <font>
                         <Font size="17.0" />
                      </font></CheckBox>
-                        <Button fx:id="register_SIgnupBtn" layoutX="46.0" layoutY="392.0" mnemonicParsing="false" onAction="#registerAccount" prefHeight="36.0" prefWidth="250.0" text="Sign up" textFill="#306090">
+                        <Button fx:id="register_SIgnupBtn" layoutX="331.0" layoutY="493.0" mnemonicParsing="false" onAction="#registerAccount" prefHeight="52.0" prefWidth="267.0" text="Creer" textFill="#306090">
                             <styleClass>
                                 <String fx:value="btn-1" />
                                 <String fx:value="radius" />
                             </styleClass>
                         </Button>
-                        <Label layoutX="19.0" layoutY="607.0" prefHeight="21.0" prefWidth="122.0" text="Deja un compte" />
-                        <Hyperlink fx:id="register_LoginHere" layoutX="146.0" layoutY="603.0" onAction="#switchForm" prefHeight="29.0" prefWidth="136.0" text="Se connecter ici" />
+                        <Label layoutX="321.0" layoutY="660.0" prefHeight="29.0" prefWidth="143.0" text="Deja un compte">
+                     <font>
+                        <Font size="17.0" />
+                     </font></Label>
+                        <Hyperlink fx:id="register_LoginHere" layoutX="500.0" layoutY="661.0" onAction="#switchForm" prefHeight="31.0" prefWidth="143.0" styleClass="btn-1" text="Se connecter ici" />
                     </children>
                 </AnchorPane>
+            <Polygon fill="#097ea4" layoutX="417.0" layoutY="47.0" points="-416.0, 358.0, -416.0, -46.0, -70.0, -46.0" stroke="BLACK" strokeType="INSIDE" styleClass="btn-1" />
             </children>
         </AnchorPane>
     </children>
