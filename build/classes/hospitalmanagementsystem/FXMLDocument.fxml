@@ -15,11 +15,11 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="862.0" prefWidth="1841.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospitalmanagementsystem.FXMLDocumentController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="862.0" prefWidth="1841.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospitalmanagementsystem.FXMLDocumentController">
     <children>
         <AnchorPane prefHeight="862.0" prefWidth="1809.0">
             <children>
-                <AnchorPane fx:id="login_form" layoutX="-2.0" prefHeight="862.0" prefWidth="1841.0" styleClass="white-bg" stylesheets="@../design/PageDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <AnchorPane fx:id="login_form" layoutX="-2.0" prefHeight="862.0" prefWidth="1841.0" styleClass="white-bg" stylesheets="@../design/PageDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                   <Polygon fill="#097ea4" layoutX="415.0" layoutY="46.0" points="-416.0, 358.0, -416.0, -46.0, -70.0, -46.0" stroke="BLACK" strokeType="INSIDE" styleClass="btn-1" />
                   <ImageView fitHeight="813.0" fitWidth="723.0" layoutX="738.0" layoutY="25.0" pickOnBounds="true" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="340.0" AnchorPane.topAnchor="25.0">
@@ -34,18 +34,18 @@
                         </Label>
                         <Label layoutX="363.0" layoutY="212.0" prefHeight="18.0" prefWidth="171.0" text="Portail Admin" textFill="#510707" />
                         <TextField fx:id="login_username" layoutX="291.0" layoutY="282.0" onAction="#loginAccount" prefHeight="52.0" prefWidth="356.0" promptText="Nom d'utilisateur" styleClass="textfield-1" stylesheets="@../design/PageDesign.css" AnchorPane.rightAnchor="1194.0" />
+                        <TextField fx:id="login_ShowPassword" layoutX="289.0" layoutY="365.0" prefHeight="52.0" prefWidth="356.0" promptText="mot de passe" AnchorPane.rightAnchor="1196.0">
+                            <styleClass>
+                                <String fx:value="textfield-1" />
+                                <String fx:value="white-bg" />
+                            </styleClass>
+                        </TextField>
                         <PasswordField fx:id="login_password" layoutX="289.0" layoutY="365.0" prefHeight="52.0" prefWidth="356.0" promptText="mot de passe" AnchorPane.rightAnchor="1196.0">
                             <styleClass>
                                 <String fx:value="textfield-1" />
                                 <String fx:value="white-bg" />
                             </styleClass>
                         </PasswordField>
-                        <TextField fx:id="login_ShowPassword" layoutX="289.0" layoutY="365.0" onAction="#loginAccount" prefHeight="52.0" prefWidth="356.0" promptText="mot de passe" AnchorPane.rightAnchor="1196.0">
-                            <styleClass>
-                                <String fx:value="textfield-1" />
-                                <String fx:value="white-bg" />
-                            </styleClass>
-                        </TextField>
                         <CheckBox fx:id="login_CheckBox" layoutX="363.0" layoutY="537.0" mnemonicParsing="false" onAction="#loginShowPassword" prefHeight="21.0" prefWidth="208.0" styleClass="btn-1" text="   Montrez le mot de passe" textFill="#2b0140" AnchorPane.rightAnchor="1270.0">
                      <font>
                         <Font size="17.0" />
@@ -61,7 +61,7 @@
                         <Hyperlink fx:id="login_registerHere" layoutX="499.0" layoutY="709.0" onAction="#switchForm" prefHeight="26.0" prefWidth="66.0" styleClass="btn-1" text="Creez ici" AnchorPane.rightAnchor="1276.0" />
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="register_form" layoutX="8.0" prefHeight="862.0" prefWidth="1841.0" styleClass="white-bg" stylesheets="@../design/PageDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <AnchorPane fx:id="register_form" layoutX="8.0" prefHeight="862.0" prefWidth="1841.0" styleClass="white-bg" stylesheets="@../design/PageDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                   <ImageView fitHeight="813.0" fitWidth="1054.0" layoutX="705.0" layoutY="35.0" pickOnBounds="true" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="82.0" AnchorPane.topAnchor="35.0">
                      <image>

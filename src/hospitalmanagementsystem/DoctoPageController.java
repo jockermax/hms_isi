@@ -12,7 +12,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -31,8 +30,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert;
+import javafx.scene.control.Tooltip;
 
 /**
  * FXML Controller class
@@ -97,6 +95,24 @@ public class DoctoPageController implements Initializable {
     private ResultSet result;
 
     private final AlertMessage tray = new AlertMessage();
+
+    public void tooltip() {
+        Tooltip userTip = new Tooltip("Entrez votre nom d'utilisateur");
+        login_DoctorID.setTooltip(userTip);
+        userTip.setStyle("-fx-background-color: linear-gradient(to bottom right, #a413a1, #64308e);"
+                + "-fx-cursor: hand;"
+                + "-fx-text-fill: #fff;"
+                + "-fx-font-size: 14px;"
+                + "-fx-font-family: Arial;");
+
+        Tooltip passTip = new Tooltip("Entrez votre mot de passe");
+        login_password.setTooltip(passTip);
+        passTip.setStyle("-fx-background-color: linear-gradient(to bottom right,  #a413a1, #64308e);"
+                + "-fx-cursor: hand;"
+                + "-fx-text-fill: #fff;"
+                + "-fx-font-size: 14px;"
+                + "-fx-font-family: Arial;");
+    }
 
     @FXML
     void loginAccount(ActionEvent event) throws SQLException {
@@ -368,6 +384,7 @@ public class DoctoPageController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         registerDoctorID();
         userList();
+        tooltip();
     }
 
 }

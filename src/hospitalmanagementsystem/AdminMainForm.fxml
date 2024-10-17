@@ -21,7 +21,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospitalmanagementsystem.AdminMainFormController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospitalmanagementsystem.AdminMainFormController">
    <children>
       <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -299,8 +299,8 @@
                                           <TableView fx:id="dashboad_tableView" layoutX="2.0" layoutY="35.0" prefHeight="408.0" prefWidth="470.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
                                             <columns>
                                               <TableColumn fx:id="dashboad_col_doctorID" prefWidth="75.0" text="Doctor ID" />
-                                              <TableColumn fx:id="dashboad_col_name" prefWidth="75.0" text="Name" />
-                                                <TableColumn fx:id="dashboad_col_specialized" prefWidth="75.0" text="Specialized" />
+                                              <TableColumn fx:id="dashboad_col_name" prefWidth="75.0" text="Nom" />
+                                                <TableColumn fx:id="dashboad_col_specialized" prefWidth="75.0" text="Specialite" />
                                                 <TableColumn fx:id="dashboad_col_status" prefWidth="75.0" text="Status" />
                                             </columns>
                                              <columnResizePolicy>

@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="862.0" prefWidth="1841.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospitalmanagementsystem.DoctoPageController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="862.0" prefWidth="1841.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospitalmanagementsystem.DoctoPageController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -62,48 +62,49 @@
             <AnchorPane fx:id="login_form" layoutX="106.0" layoutY="17.0" prefHeight="901.0" prefWidth="1328.0" stylesheets="@../design/PageDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Polygon fill="#85008a" layoutX="416.0" layoutY="58.0" points="-416.0, 358.0, -416.0, -46.0, -70.0, -46.0" stroke="BLACK" strokeType="INSIDE" />
-                  <ImageView fitHeight="819.0" fitWidth="525.0" layoutX="1006.0" layoutY="54.0" pickOnBounds="true" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="54.0">
+                  <ImageView fitHeight="837.0" fitWidth="565.0" layoutX="998.9999999999999" layoutY="47.2" pickOnBounds="true" AnchorPane.bottomAnchor="9.399999999999977" AnchorPane.rightAnchor="277.5999999999999" AnchorPane.topAnchor="47.2">
                      <image>
                         <Image url="@../Images/image%20(49).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="354.0" layoutY="87.0" prefHeight="36.0" prefWidth="232.0" text="Connexion">
+                  <Label layoutX="536.0" layoutY="87.0" prefHeight="36.0" prefWidth="232.0" text="Connexion">
                      <font>
                         <Font name="Tahoma" size="31.0" />
                      </font>
                   </Label>
-                  <Label layoutX="349.0" layoutY="153.0" prefHeight="21.0" prefWidth="155.0" text="Doctor">
+                  <Label layoutX="531.0" layoutY="153.0" prefHeight="21.0" prefWidth="155.0" text="Doctor">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="login_DoctorID" layoutX="205.0" layoutY="235.0" onAction="#loginAccount" prefHeight="45.0" prefWidth="351.0" promptText="Identifiant du docteur" styleClass="textfield-1" stylesheets="@../design/PageDesign.css" />
-                  <PasswordField fx:id="login_password" layoutX="208.0" layoutY="313.0" onAction="#loginAccount" prefHeight="42.0" prefWidth="356.0" promptText="mot de passe">
-                     <styleClass>
-                        <String fx:value="textfield-1" />
-                        <String fx:value="white-bg" />
-                     </styleClass>
-                  </PasswordField>
-                  <TextField fx:id="login_ShowPassword" layoutX="208.0" layoutY="313.0" onAction="#loginAccount" prefHeight="42.0" prefWidth="356.0" promptText="mot de passe">
+                  <TextField fx:id="login_DoctorID" layoutX="387.0" layoutY="235.0" onAction="#loginAccount" prefHeight="45.0" prefWidth="351.0" promptText="Identifiant du docteur" styleClass="textfield-1" stylesheets="@../design/PageDesign.css" />
+                  <TextField fx:id="login_ShowPassword" layoutX="389.0" layoutY="313.0" onAction="#loginAccount" prefHeight="42.0" prefWidth="356.0" promptText="mot de passe">
                      <styleClass>
                         <String fx:value="textfield-1" />
                         <String fx:value="white-bg" />
                      </styleClass>
                   </TextField>
-                  <CheckBox fx:id="login_CheckBox" layoutX="240.0" layoutY="384.0" mnemonicParsing="false" onAction="#loginShowPassword" prefHeight="29.0" prefWidth="186.0" styleClass="btn-2" stylesheets="@../design/MainFormDesign.css" text="Montrer le mot de passe" />
-                  <Button fx:id="login_loginBtn" layoutX="220.0" layoutY="457.0" mnemonicParsing="false" onAction="#loginAccount" prefHeight="45.0" prefWidth="250.0" text="Se Connecter">
+                  <PasswordField fx:id="login_password" layoutX="390.0" layoutY="313.0" onAction="#loginAccount" prefHeight="42.0" prefWidth="356.0" promptText="mot de passe">
+                     <styleClass>
+                        <String fx:value="textfield-1" />
+                        <String fx:value="white-bg" />
+                     </styleClass>
+                  </PasswordField>
+                  <CheckBox fx:id="login_CheckBox" layoutX="422.0" layoutY="384.0" mnemonicParsing="false" onAction="#loginShowPassword" prefHeight="29.0" prefWidth="186.0" styleClass="btn-2" stylesheets="@../design/MainFormDesign.css" text="Montrer le mot de passe" />
+                  <Button fx:id="login_loginBtn" layoutX="402.0" layoutY="457.0" mnemonicParsing="false" onAction="#loginAccount" prefHeight="45.0" prefWidth="250.0" text="Se Connecter">
                      <styleClass>
                         <String fx:value="btn-2" />
                         <String fx:value="radius" />
                      </styleClass>
                   </Button>
-                  <ComboBox fx:id="login_user" layoutX="239.0" layoutY="568.0" onAction="#switchPage" prefHeight="30.0" prefWidth="212.0" promptText="Vous etes " stylesheets="@../design/PageDesign.css" />
-                  <Label layoutX="105.0" layoutY="704.0" prefHeight="28.0" prefWidth="212.0" text="Pas encore de compte">
+                  <ComboBox fx:id="login_user" layoutX="421.0" layoutY="568.0" onAction="#switchPage" prefHeight="30.0" prefWidth="212.0" promptText="Vous etes " stylesheets="@../design/PageDesign.css" />
+                  <Label layoutX="287.0" layoutY="704.0" prefHeight="28.0" prefWidth="212.0" text="Pas encore de compte">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <Hyperlink fx:id="login_registerHere" layoutX="333.0" layoutY="706.0" onAction="#switchForm" prefHeight="25.0" prefWidth="124.0" styleClass="btn-2" text="Creer ici" />
+                  <Hyperlink fx:id="login_registerHere" layoutX="515.0" layoutY="706.0" onAction="#switchForm" prefHeight="25.0" prefWidth="124.0" styleClass="btn-2" text="Creer ici" />
+                  <Label layoutX="1633.0" layoutY="849.0" prefHeight="18.0" prefWidth="186.0" text="Copyright Mehmed Bamba" AnchorPane.bottomAnchor="21.399999999999977" AnchorPane.rightAnchor="22.199999999999818" AnchorPane.topAnchor="849.0" />
                </children>
                <styleClass>
                   <String fx:value="white-bg" />

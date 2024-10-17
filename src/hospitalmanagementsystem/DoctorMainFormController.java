@@ -23,14 +23,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,7 +46,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -734,7 +729,7 @@ public class DoctorMainFormController implements Initializable {
                 || appointments_address.getText().isEmpty()
                 || appointments_status.getSelectionModel().getSelectedItem() == null
                 || appoinment_schedule.getValue() == null) {
-            tray.errorMessages("Please fill the blank fields");
+            tray.errorMessages("Veuillez remplir tous les champs vides");
         } else {
             String checkAppointmentID = "SELECT * FROM appointment WHERE appointment_id = "
                     + appointments_appointmentID.getText();
@@ -995,7 +990,7 @@ public class DoctorMainFormController implements Initializable {
                     Path transfer = Paths.get(path);
 
                     // LINK YOUR DIRECTORY FOLDER
-                    Path copy = Paths.get("C:\\Users\\DELL\\Documents\\NetBeansProjects\\yalla-pitie\\src\\Directory\\" + Data.doctor_id + ".jpg");
+                    Path copy = Paths.get("C:\\dossier_prive\\hms_isi\\src\\Directory\\" + Data.doctor_id + ".jpg");
 
                     try {
                         // TO PUT THE IMAGE FILE TO YOUR DIRECTORY FOLDER
@@ -1018,6 +1013,36 @@ public class DoctorMainFormController implements Initializable {
         }
     }
 
+//    public void profileDisplayImages() {
+//
+//        String selectData = "SELECT * FROM doctor WHERE doctor_id = '"
+//                + Data.doctor_id + "'";
+//        String temp_path1 = "";
+//        String temp_path2 = "";
+//        connect = Database.connectDB();
+//
+//        try {
+//            prepare = connect.prepareStatement(selectData);
+//            result = prepare.executeQuery();
+//
+//            if (result.next()) {
+//                temp_path1 = "File:" + result.getString("image");
+//                temp_path2 = "File:" + result.getString("image");
+//
+//                if (result.getString("image") != null) {
+//                    image = new Image(temp_path1, 1012, 22, false, true);
+//                    top_profile.setFill(new ImagePattern(image));
+//
+//                    image = new Image(temp_path2, 128, 103, false, true);
+//                    profile_circleimage.setFill(new ImagePattern(image));
+//                }
+//
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
     public void profileDisplayImages() {
 
         String selectData = "SELECT * FROM doctor WHERE doctor_id = '"
@@ -1031,17 +1056,29 @@ public class DoctorMainFormController implements Initializable {
             result = prepare.executeQuery();
 
             if (result.next()) {
-                temp_path1 = "File:" + result.getString("image");
-                temp_path2 = "File:" + result.getString("image");
+                String imagePath = result.getString("image");
 
-                if (result.getString("image") != null) {
-                    image = new Image(temp_path1, 1012, 22, false, true);
-                    top_profile.setFill(new ImagePattern(image));
+                if (imagePath != null && !imagePath.isEmpty()) {
+                    // Construire les chemins des images
+                    temp_path1 = "file:/" + imagePath; // Chemin pour l'image principale
+                    temp_path2 = "file:/" + imagePath; // Chemin pour l'image du cercle
 
-                    image = new Image(temp_path2, 128, 103, false, true);
-                    profile_circleimage.setFill(new ImagePattern(image));
+                    // Vérifier si l'image peut être chargée
+                    File file = new File(imagePath);
+                    if (file.exists()) {
+                        // Charger l'image pour top_profile
+                        image = new Image(temp_path1, 1012, 22, false, true);
+                        top_profile.setFill(new ImagePattern(image));
+
+                        // Charger l'image pour profile_circleimage
+                        image = new Image(temp_path2, 128, 103, false, true);
+                        profile_circleimage.setFill(new ImagePattern(image));
+                    } else {
+                        System.out.println("L'image n'existe pas à l'emplacement : " + imagePath);
+                    }
+                } else {
+                    System.out.println("Aucun chemin d'image disponible dans la base de données.");
                 }
-
             }
 
         } catch (Exception e) {
@@ -1227,11 +1264,11 @@ public class DoctorMainFormController implements Initializable {
                     // Met à jour le texte de l'horloge
                     String currentTime = format.format(new Date());
                     date_time.setText(currentTime);
-                    
+
                     // Défilement du texte
                     double width = date_time.getLayoutBounds().getWidth();
                     date_time.setTranslateX(date_time.getTranslateX() - 10); // Ajustez la valeur pour la vitesse du défilement
-                    
+
                     // Reset du positionnement quand le texte est complètement sorti de l'écran
                     if (date_time.getTranslateX() < -width) {
                         date_time.setTranslateX(1000); // Remplacez 800 par la largeur de votre fenêtre
@@ -1256,11 +1293,9 @@ public class DoctorMainFormController implements Initializable {
 
 //    private ObservableList<AppointmentData> appointmentListrv = FXCollections.observableArrayList();
 //    private FilteredList<AppointmentData> filteredAppointments;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-       
         displayAdminIdNumberName();
         runTime();
 

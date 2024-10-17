@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="862.0" prefWidth="1841.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospitalmanagementsystem.FXMLDocumentController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="862.0" prefWidth="1841.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospitalmanagementsystem.FXMLDocumentController">
     <children>
         <AnchorPane prefHeight="862.0" prefWidth="1809.0">
             <children>
@@ -34,18 +34,18 @@
                         </Label>
                         <Label layoutX="363.0" layoutY="212.0" prefHeight="18.0" prefWidth="171.0" text="Portail Admin" textFill="#510707" />
                         <TextField fx:id="login_username" layoutX="291.0" layoutY="282.0" onAction="#loginAccount" prefHeight="52.0" prefWidth="356.0" promptText="Nom d'utilisateur" styleClass="textfield-1" stylesheets="@../design/PageDesign.css" AnchorPane.rightAnchor="1194.0" />
+                        <TextField fx:id="login_ShowPassword" layoutX="289.0" layoutY="365.0" prefHeight="52.0" prefWidth="356.0" promptText="mot de passe" AnchorPane.rightAnchor="1196.0">
+                            <styleClass>
+                                <String fx:value="textfield-1" />
+                                <String fx:value="white-bg" />
+                            </styleClass>
+                        </TextField>
                         <PasswordField fx:id="login_password" layoutX="289.0" layoutY="365.0" prefHeight="52.0" prefWidth="356.0" promptText="mot de passe" AnchorPane.rightAnchor="1196.0">
                             <styleClass>
                                 <String fx:value="textfield-1" />
                                 <String fx:value="white-bg" />
                             </styleClass>
                         </PasswordField>
-                        <TextField fx:id="login_ShowPassword" layoutX="289.0" layoutY="365.0" onAction="#loginAccount" prefHeight="52.0" prefWidth="356.0" promptText="mot de passe" AnchorPane.rightAnchor="1196.0">
-                            <styleClass>
-                                <String fx:value="textfield-1" />
-                                <String fx:value="white-bg" />
-                            </styleClass>
-                        </TextField>
                         <CheckBox fx:id="login_CheckBox" layoutX="363.0" layoutY="537.0" mnemonicParsing="false" onAction="#loginShowPassword" prefHeight="21.0" prefWidth="208.0" styleClass="btn-1" text="   Montrez le mot de passe" textFill="#2b0140" AnchorPane.rightAnchor="1270.0">
                      <font>
                         <Font size="17.0" />

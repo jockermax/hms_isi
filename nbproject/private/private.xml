@@ -4,11 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/dossier_prive/hms_isi/src/hospitalmanagementsystem/FXMLDocumentController.java</file>
-            <file>file:/C:/dossier_prive/hms_isi/src/hospitalmanagementsystem/HospitalManagementSystem.java</file>
-            <file>file:/C:/dossier_prive/hms_isi/src/hospitalmanagementsystem/FXMLDocument.fxml</file>
-            <file>file:/C:/dossier_prive/hms_isi/src/hospitalmanagementsystem/DoctorMainFormController.java</file>
+            <file>file:/C:/dossier_prive/hms_isi/src/hospitalmanagementsystem/Database.java</file>
             <file>file:/C:/dossier_prive/hms_isi/src/hospitalmanagementsystem/AdminMainFormController.java</file>
-            <file>file:/C:/dossier_prive/hms_isi/src/hospitalmanagementsystem/AppointmentData.java</file>
+            <file>file:/C:/dossier_prive/hms_isi/src/hospitalmanagementsystem/EditPatientFormController.java</file>
         </group>
     </open-files>
 </project-private>

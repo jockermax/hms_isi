@@ -16,7 +16,7 @@ public class Database {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connect  = DriverManager.getConnection("jdbc:mysql://localhost:3306/hms_java","root","");
+            Connection connect  = DriverManager.getConnection("jdbc:mysql://localhost:3306/a_memoire","root","");
             return connect;
             }catch(Exception e)
         {
