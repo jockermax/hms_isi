@@ -178,6 +178,9 @@ public class AdminMainFormController implements Initializable {
     private TableColumn<DoctorData, String> doctors_col_status;
 
     @FXML
+    private TableColumn<DoctorData, String> doctors_col_creneaau;
+
+    @FXML
     private AnchorPane doctors_form;
 
     @FXML
@@ -335,7 +338,6 @@ public class AdminMainFormController implements Initializable {
     private final AlertMessage tray = new AlertMessage();
     private Image image;
 
-    
     public void dashboardAD() {
         String sql = "SELECT COUNT(id) FROM doctor WHERE status = 'Active' AND delete_date IS NULL";
 
@@ -692,10 +694,6 @@ public class AdminMainFormController implements Initializable {
             PatientsData pData;
 
             while (result.next()) {
-//                PatientsData(Integer id, Integer patientID, String password, String fullName, Long mobileNumber
-//            , String address, String image, String description, String diagnosis, String treatment
-//            , String doctor, String specialized, Date date, Date dateModify
-//            , Date dateDelete, String status)
                 pData = new PatientsData(result.getInt("id"), result.getInt("patient_id"),
                         result.getString("password"), result.getString("full_name"),
                         result.getLong("mobile_number"), result.getString("gender"),
@@ -747,9 +745,6 @@ public class AdminMainFormController implements Initializable {
 
             AppointmentData aData;
             while (result.next()) {
-//            AppointmentData(Integer id, Integer appointmentID, String name, String gender,
-//            Long mobileNumber, String description, String diagnosis, String treatment, String address,
-//            Date date, Date dateModify, Date dateDelete, String status, Date schedule)
                 aData = new AppointmentData(result.getInt("id"), result.getInt("appointment_id"),
                         result.getString("name"), result.getString("gender"), result.getLong("mobile_number"),
                         result.getString("description"), result.getString("diagnosis"),
@@ -787,49 +782,48 @@ public class AdminMainFormController implements Initializable {
 
     public void profileDisplayImages() {
 
-    String selectData = "SELECT * FROM admin WHERE admin_id = " + Data.admin_id;
-    connect = Database.connectDB();
+        String selectData = "SELECT * FROM admin WHERE admin_id = " + Data.admin_id;
+        connect = Database.connectDB();
 
-    String tempPath1 = "";
-    String tempPath2 = "";
-    try {
-        prepare = connect.prepareStatement(selectData);
-        result = prepare.executeQuery();
+        String tempPath1 = "";
+        String tempPath2 = "";
+        try {
+            prepare = connect.prepareStatement(selectData);
+            result = prepare.executeQuery();
 
-        if (result.next()) {  // Cette ligne est essentielle pour avancer dans le ResultSet
-            String imagePath = result.getString("image");
+            if (result.next()) {  // Cette ligne est essentielle pour avancer dans le ResultSet
+                String imagePath = result.getString("image");
 
-            if (imagePath != null && !imagePath.isEmpty()) {
-                tempPath1 = "file:" + imagePath;
-                tempPath2 = "file:" + imagePath;
+                if (imagePath != null && !imagePath.isEmpty()) {
+                    tempPath1 = "file:" + imagePath;
+                    tempPath2 = "file:" + imagePath;
 
-                // Vérification que le fichier existe
-                File file1 = new File(imagePath);
-                if (file1.exists()) {
-                    image = new Image(tempPath1, 1012, 22, false, true);
-                    top_profile.setFill(new ImagePattern(image));
+                    // Vérification que le fichier existe
+                    File file1 = new File(imagePath);
+                    if (file1.exists()) {
+                        image = new Image(tempPath1, 1012, 22, false, true);
+                        top_profile.setFill(new ImagePattern(image));
+                    } else {
+                        System.out.println("Le fichier " + imagePath + " n'existe pas");
+                    }
+
+                    File file2 = new File(imagePath);
+                    if (file2.exists()) {
+                        image = new Image(tempPath2, 137, 95, false, true);
+                        profile_circle.setFill(new ImagePattern(image));
+                    } else {
+                        System.out.println("Le fichier " + imagePath + " n'existe pas");
+                    }
                 } else {
-                    System.out.println("Le fichier " + imagePath + " n'existe pas");
-                }
-
-                File file2 = new File(imagePath);
-                if (file2.exists()) {
-                    image = new Image(tempPath2, 137, 95, false, true);
-                    profile_circle.setFill(new ImagePattern(image));
-                } else {
-                    System.out.println("Le fichier " + imagePath + " n'existe pas");
+                    System.out.println("Chemin d'image vide ou null");
                 }
             } else {
-                System.out.println("Chemin d'image vide ou null");
+                System.out.println("Aucune donnée trouvée pour cet admin_id.");
             }
-        } else {
-            System.out.println("Aucune donnée trouvée pour cet admin_id.");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
-
 
     // PARTIE POUR LE PAIEMENT
     public ObservableList<PatientsData> paymentGetData() {
@@ -845,9 +839,6 @@ public class AdminMainFormController implements Initializable {
 
             PatientsData pData;
             while (result.next()) {
-//                (Integer id, Integer patientID, String fullName, String gender
-//            , String description, String diagnosis, String treatment
-//            , String doctor, String image, Date date)
                 pData = new PatientsData(result.getInt("id"),
                         result.getInt("patient_id"), result.getString("full_name"),
                         result.getString("gender"), result.getString("description"),
@@ -920,138 +911,76 @@ public class AdminMainFormController implements Initializable {
     }
 
     public void profileUpdateBtn() {
-    connect = Database.connectDB();
-    
-    // Vérification des champs obligatoires
-    if (ptofile_adminID.getText().isEmpty()
-            || profile_username.getText().isEmpty()
-            || profile_email.getText().isEmpty()
-            || profile_status.getSelectionModel().getSelectedItem() == null) {
-        tray.errorMessages("VEUILLEZ REMPLIR TOUS LES CHAMPS");
-    } else {
-        // Cas où l'image n'a pas été changée
-        if (Data.path == null || Data.path.isEmpty()) {
-            String updateData = "UPDATE admin SET username = ?, email = ?, gender = ? "
-                    + "WHERE admin_id = " + Data.admin_id;
+        connect = Database.connectDB();
 
-            try {
-                prepare = connect.prepareStatement(updateData);
-                prepare.setString(1, profile_username.getText());
-                prepare.setString(2, profile_email.getText());
-                prepare.setString(3, profile_status.getSelectionModel().getSelectedItem());
-
-                prepare.executeUpdate();
-
-                profileDisplayInfo();
-                tray.successMessages("MISE A JOUR REUSSIE");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        // Cas où l'image a été changée
+        // Vérification des champs obligatoires
+        if (ptofile_adminID.getText().isEmpty()
+                || profile_username.getText().isEmpty()
+                || profile_email.getText().isEmpty()
+                || profile_status.getSelectionModel().getSelectedItem() == null) {
+            tray.errorMessages("VEUILLEZ REMPLIR TOUS LES CHAMPS");
         } else {
-            String updateData = "UPDATE admin SET username = ?, email = ?, image = ?, gender = ? "
-                    + "WHERE admin_id = " + Data.admin_id;
-            try {
-                prepare = connect.prepareStatement(updateData);
-                prepare.setString(1, profile_username.getText());
-                prepare.setString(2, profile_email.getText());
+            // Cas où l'image n'a pas été changée
+            if (Data.path == null || Data.path.isEmpty()) {
+                String updateData = "UPDATE admin SET username = ?, email = ?, gender = ? "
+                        + "WHERE admin_id = " + Data.admin_id;
 
-                // Chemin du fichier source (l'image sélectionnée)
-                String path = Data.path;
-                path = path.replace("\\", "\\\\"); // Corrige les séparateurs pour éviter les problèmes
-                Path transfer = Paths.get(path);
-///C:\dossier_prive\hms_isi\src\Directory
-                // Chemin de destination
-                Path copy = Paths.get("C:\\dossier_prive\\hms_isi\\src\\Directory\\"
-                        + Data.admin_id + ".jpg");
+                try {
+                    prepare = connect.prepareStatement(updateData);
+                    prepare.setString(1, profile_username.getText());
+                    prepare.setString(2, profile_email.getText());
+                    prepare.setString(3, profile_status.getSelectionModel().getSelectedItem());
 
-                // Vérification si le fichier source existe avant de copier
-                if (Files.exists(transfer)) {
-                    Files.copy(transfer, copy, StandardCopyOption.REPLACE_EXISTING);
-                    prepare.setString(3, copy.toAbsolutePath().toString());
-                } else {
-                    tray.errorMessages("Le fichier source n'existe pas : " + transfer.toString());
-                    return;  // Arrête l'exécution si le fichier n'existe pas
+                    prepare.executeUpdate();
+
+                    profileDisplayInfo();
+                    tray.successMessages("MISE A JOUR REUSSIE");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
-                prepare.setString(4, profile_status.getSelectionModel().getSelectedItem());
+                // Cas où l'image a été changée
+            } else {
+                String updateData = "UPDATE admin SET username = ?, email = ?, image = ?, gender = ? "
+                        + "WHERE admin_id = " + Data.admin_id;
+                try {
+                    prepare = connect.prepareStatement(updateData);
+                    prepare.setString(1, profile_username.getText());
+                    prepare.setString(2, profile_email.getText());
 
-                // Exécute la mise à jour dans la base de données
-                prepare.executeUpdate();
-                
-                // Affiche les nouvelles informations après mise à jour
-                profileDisplayInfo();
-                profileDisplayImages();
-                tray.successMessages("MISE A JOUR REUSSIE AVEC IMAGE !");
-                
-            } catch (Exception e) {
-                e.printStackTrace();
+                    // Chemin du fichier source (l'image sélectionnée)
+                    String path = Data.path;
+                    path = path.replace("\\", "\\\\"); // Corrige les séparateurs pour éviter les problèmes
+                    Path transfer = Paths.get(path);
+                    // Chemin de destination
+                    Path copy = Paths.get("C:\\dossier_prive\\hms_isi\\src\\Directory\\"
+                            + Data.admin_id + ".jpg");
+
+                    // Vérification si le fichier source existe avant de copier
+                    if (Files.exists(transfer)) {
+                        Files.copy(transfer, copy, StandardCopyOption.REPLACE_EXISTING);
+                        prepare.setString(3, copy.toAbsolutePath().toString());
+                    } else {
+                        tray.errorMessages("Le fichier source n'existe pas : " + transfer.toString());
+                        return;  // Arrête l'exécution si le fichier n'existe pas
+                    }
+
+                    prepare.setString(4, profile_status.getSelectionModel().getSelectedItem());
+
+                    // Exécute la mise à jour dans la base de données
+                    prepare.executeUpdate();
+
+                    // Affiche les nouvelles informations après mise à jour
+                    profileDisplayInfo();
+                    profileDisplayImages();
+                    tray.successMessages("MISE A JOUR REUSSIE AVEC IMAGE !");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
-}
-
-    
-//    public void profileUpdateBtn() {
-//        connect = Database.connectDB();
-//        if (ptofile_adminID.getText().isEmpty()
-//                || profile_username.getText().isEmpty()
-//                || profile_email.getText().isEmpty()
-//                || profile_status.getSelectionModel().getSelectedItem() == null) {
-//            tray.errorMessages("VEUILLEZ REMPLIR TOUS LES CHAMPS");
-//        } else {
-//            if (Data.path == null || "".equals(Data.path)) {
-//                String updateData = "UPDATE admin SET username = ?, email = ?, gender = ? "
-//                        + "WHERE admin_id = " + Data.admin_id;
-//
-//                try {
-//                    prepare = connect.prepareStatement(updateData);
-//                    prepare.setString(1, profile_username.getText());
-//                    prepare.setString(2, profile_email.getText());
-//                    prepare.setString(3, profile_status.getSelectionModel().getSelectedItem());
-//
-//                    prepare.executeUpdate();
-//
-//                    profileDisplayInfo();
-//
-//                    tray.successMessages("MISE A JOUR REUSSIE");
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//
-//            } else {
-//                String updateData = "UPDATE admin SET username = ?, email = ?, image = ?, gender = ? "
-//                        + "WHERE admin_id = " + Data.admin_id;
-//                try {
-//                    prepare = connect.prepareStatement(updateData);
-//                    prepare.setString(1, profile_username.getText());
-//                    prepare.setString(2, profile_email.getText());
-//
-//                    String path = Data.path;
-//                    path = path.replace("\\", "\\\\");
-//                    Path transfer = Paths.get(path);
-//
-//                    Path copy = Paths.get("C:\\Users\\DELL\\Documents\\NetBeansProjects\\hms_isi\\src\\Directory\\"
-//                            + Data.admin_id + ".jpg");
-//                    
-//                    
-//
-//                    Files.copy(transfer, copy, StandardCopyOption.REPLACE_EXISTING);
-//                    prepare.setString(3, copy.toAbsolutePath().toString());
-//                    prepare.setString(4, profile_status.getSelectionModel().getSelectedItem());
-//
-//                    prepare.executeUpdate();
-//                    profileDisplayInfo();
-//                    profileDisplayImages();
-//                    tray.successMessages("Updated Successfully!");
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//
-//    }
 
     public void profileDisplayInfo() {
 
@@ -1106,60 +1035,6 @@ public class AdminMainFormController implements Initializable {
         profile_status.setItems(listData);
     }
 
-//    public void switchForm(ActionEvent event) {
-//
-//        if (event.getSource() == dashboard_btn) {
-//            dashboard_form.setVisible(true);
-//            doctors_form.setVisible(false);
-//            patients_form.setVisible(false);
-//            appointments_form.setVisible(false);
-//            // payment_form.setVisible(false);
-//            profie_form.setVisible(false);
-//        } else if (event.getSource() == doctors_btn) {
-//            doctors_form.setVisible(true);
-//            dashboard_form.setVisible(false);
-//            patients_form.setVisible(false);
-//            appointments_form.setVisible(false);
-//            // payment_form.setVisible(false);
-//            profie_form.setVisible(false);
-//
-//            doctorDisplayData();
-//            patientDisplayData();
-//        } else if (event.getSource() == patients_btn) {
-//            doctors_form.setVisible(false);
-//            dashboard_form.setVisible(false);
-//            patients_form.setVisible(true);
-//            appointments_form.setVisible(false);
-//            // payment_form.setVisible(false);
-//            profie_form.setVisible(false);
-//
-//            doctorDisplayData();
-//            patientDisplayData();
-//        } else if (event.getSource() == appointments_btn) {
-//            doctors_form.setVisible(false);
-//            dashboard_form.setVisible(false);
-//            patients_form.setVisible(false);
-//            appointments_form.setVisible(true);
-//            // payment_form.setVisible(false);
-//            profie_form.setVisible(false);
-//
-//            appointmentDisplayData();
-//
-//        } else if (event.getSource() == profile_btn) {
-//            dashboard_form.setVisible(false);
-//            doctors_form.setVisible(false);
-//            patients_form.setVisible(false);
-//            appointments_form.setVisible(false);
-//            // payment_form.setVisible(false);
-//            profie_form.setVisible(true);
-//
-//            profileStatusList();
-//            profileDisplayInfo();
-//            //profileDisplayImages();
-//
-//            //  current_form.setText("Profile Form");
-//        }
-//    }
     public void switchForm(ActionEvent event) {
 
         if (event.getSource() == dashboard_btn) {
@@ -1501,28 +1376,6 @@ public class AdminMainFormController implements Initializable {
 
     }
 
-//    public void runTime() {
-//        new Thread() {
-//
-//            public void run() {
-//                SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
-//                while (true) {
-//                    try {
-//
-//                        Thread.sleep(1000); // 1000 ms = 1s
-//
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                    Platform.runLater(() -> {
-//                        date_time.setText(format.format(new Date()));
-//                    });
-//                }
-//            }
-//        }.start();
-//
-//    }
     public void runTime() {
         new Thread() {
             public void run() {

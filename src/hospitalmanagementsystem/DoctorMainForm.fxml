@@ -24,7 +24,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1115.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospitalmanagementsystem.DoctorMainFormController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1115.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospitalmanagementsystem.DoctorMainFormController">
    <children>
       <AnchorPane fx:id="main_form" prefHeight="900.0" prefWidth="1200.0">
          <children>
@@ -41,13 +41,13 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <Label fx:id="date_time" layoutX="380.0" layoutY="16.0" prefHeight="30.0" prefWidth="220.0" text="       DD:MM:YY" AnchorPane.leftAnchor="380.0">
+                        <Label fx:id="date_time" layoutX="380.0" layoutY="16.0" prefHeight="30.0" prefWidth="220.0" text="       DD:MM:YY" textFill="WHITE" AnchorPane.leftAnchor="380.0">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                            <styleClass>
                               <String fx:value="table-view" />
-                              <String fx:value="white-bg" />
+                              <String fx:value="bg-color-2" />
                               <String fx:value="radius" />
                            </styleClass></Label>
                         <Label fx:id="Current_Form" layoutX="193.0" layoutY="14.0" prefHeight="34.0" prefWidth="163.0" styleClass="header-2" stylesheets="@../design/DoctorMainFormDesign.css" text="Tableau de bord" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="759.0">
@@ -55,15 +55,15 @@
                               <Font size="19.0" />
                            </font>
                         </Label>
-                        <Circle fx:id="top_profile" fill="DODGERBLUE" layoutX="999.0" layoutY="32.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="98.0" />
+                        <Circle fx:id="top_profile" fill="DODGERBLUE" layoutX="999.0" layoutY="31.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="100.0" />
                         <Label layoutX="1014.0" layoutY="22.0" prefHeight="18.0" prefWidth="42.0" text="Active" AnchorPane.rightAnchor="44.399999999999864" />
                         <Circle fill="#1fff6d" layoutX="1072.0" layoutY="31.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="21.0" />
-                        <Label layoutX="632.0" layoutY="20.0" prefHeight="25.0" prefWidth="114.0" text="Welcome," AnchorPane.rightAnchor="375.0">
+                        <Label layoutX="632.0" layoutY="20.0" prefHeight="26.0" prefWidth="102.0" text="Bienvenue," AnchorPane.rightAnchor="388.0">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="top_username" layoutX="725.0" layoutY="21.0" prefHeight="23.0" prefWidth="114.0" text="Bamba" textFill="#8a0085" AnchorPane.rightAnchor="282.0">
+                        <Label fx:id="top_username" layoutX="725.0" layoutY="21.0" prefHeight="23.0" prefWidth="134.0" styleClass="bg-color-2" text="Bamba" textFill="WHITE" AnchorPane.rightAnchor="263.0">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
@@ -494,8 +494,10 @@
                                     <String fx:value="white-bg" />
                                  </styleClass>
                                  <children>
-                                    <TextField layoutX="181.0" layoutY="14.0" prefHeight="31.0" prefWidth="555.0" promptText="Rechercher un rendez-vous ici" AnchorPane.leftAnchor="181.0" AnchorPane.rightAnchor="185.0" />
-                                    <Button fx:id="Btn_search_rv" layoutX="764.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="141.0" styleClass="btn-2" text="rechercher un RV" AnchorPane.rightAnchor="16.0" />
+                                    <TextField fx:id="appointments_searchField" layoutX="181.0" layoutY="14.0" prefHeight="31.0" prefWidth="667.0" promptText="Rechercher un rendez-vous ici" AnchorPane.leftAnchor="181.0" AnchorPane.rightAnchor="75.0">
+                                       <font>
+                                          <Font name="Bauhaus 93" size="15.0" />
+                                       </font></TextField>
                                  </children>
                               </AnchorPane>
                               <Label layoutX="27.0" layoutY="14.0" prefHeight="30.0" prefWidth="158.0" styleClass="header-2" stylesheets="@../design/MainFormDesign.css" text="Rendez-vous">
@@ -514,6 +516,7 @@
                                     <TableColumn fx:id="appointments_col_dateModify" prefWidth="121.60009765625" text="Date Modification" />
                                     <TableColumn fx:id="appointments_col_dateDelete" prefWidth="111.20001220703125" text="Date Suppression" />
                                     <TableColumn fx:id="appointments_col_status" prefWidth="67.2000732421875" text="Status" />
+                                    <TableColumn fx:id="appointments_col_heure" prefWidth="69.59994506835938" text="Heure" />
                                  </columns>
                                  <styleClass>
                                     <String fx:value="shadow" />
@@ -532,17 +535,17 @@
                                     <Label layoutX="5.0" layoutY="18.0" prefHeight="21.0" prefWidth="142.0" text="ID du Rendez-Vous" />
                                     <TextField fx:id="appointments_appointmentID" layoutX="159.0" layoutY="14.0" prefHeight="23.0" prefWidth="183.0" styleClass="textfield-2" stylesheets="@../design/DoctorMainFormDesign.css" />
                                     <Label layoutX="87.0" layoutY="61.0" prefHeight="18.0" prefWidth="44.0" text="Nom" />
-                                    <TextField fx:id="appointments_name" layoutX="159.0" layoutY="57.0" prefHeight="26.0" prefWidth="184.0" styleClass="textfield-2" stylesheets="@../design/DoctorMainFormDesign.css" />
+                                    <TextField fx:id="appointments_name" layoutX="159.0" layoutY="57.0" prefHeight="26.0" prefWidth="184.0" promptText="Saisissez le nom" styleClass="textfield-2" stylesheets="@../design/DoctorMainFormDesign.css" />
                                     <Label layoutX="85.0" layoutY="100.0" prefHeight="18.0" prefWidth="53.0" text="Genre" />
                                     <ComboBox fx:id="appointments_gender" layoutX="158.0" layoutY="98.0" prefHeight="26.0" prefWidth="186.0" promptText="Choisir...." styleClass="textfield-2" stylesheets="@../design/DoctorMainFormDesign.css" />
                                     <Label layoutX="383.0" layoutY="16.0" prefHeight="18.0" prefWidth="103.0" text="Description" />
-                                    <TextField fx:id="appointments_description" layoutX="489.0" layoutY="11.0" prefHeight="26.0" prefWidth="184.0" styleClass="textfield-2" stylesheets="@../design/DoctorMainFormDesign.css" />
+                                    <TextField fx:id="appointments_description" layoutX="489.0" layoutY="11.0" prefHeight="26.0" prefWidth="184.0" promptText="La description" styleClass="textfield-2" stylesheets="@../design/DoctorMainFormDesign.css" />
                                     <Label layoutX="374.0" layoutY="61.0" prefHeight="18.0" prefWidth="94.0" text="DIagnostique" />
-                                    <TextField fx:id="appointments_diagnosis" layoutX="489.0" layoutY="56.0" prefHeight="26.0" prefWidth="184.0" styleClass="textfield-2" stylesheets="@../design/DoctorMainFormDesign.css" />
+                                    <TextField fx:id="appointments_diagnosis" layoutX="489.0" layoutY="56.0" prefHeight="26.0" prefWidth="184.0" promptText="La diagnostique" styleClass="textfield-2" stylesheets="@../design/DoctorMainFormDesign.css" />
                                     <Label layoutX="387.0" layoutY="105.0" prefHeight="18.0" prefWidth="99.0" text="Traitement" />
-                                    <TextField fx:id="appointments_treatment" layoutX="488.0" layoutY="100.0" prefHeight="26.0" prefWidth="184.0" styleClass="textfield-2" stylesheets="@../design/DoctorMainFormDesign.css" />
+                                    <TextField fx:id="appointments_treatment" layoutX="488.0" layoutY="100.0" prefHeight="26.0" prefWidth="184.0" promptText="Le traitement" styleClass="textfield-2" stylesheets="@../design/DoctorMainFormDesign.css" />
                                     <Label layoutX="386.0" layoutY="146.0" prefHeight="18.0" prefWidth="98.0" text="Telephone" />
-                                    <TextField fx:id="appointments_mobileNumber" layoutX="489.0" layoutY="141.0" prefHeight="26.0" prefWidth="184.0" styleClass="textfield-2" stylesheets="@../design/DoctorMainFormDesign.css" />
+                                    <TextField fx:id="appointments_mobileNumber" layoutX="489.0" layoutY="141.0" prefHeight="26.0" prefWidth="184.0" promptText="Numero de telephone" styleClass="textfield-2" stylesheets="@../design/DoctorMainFormDesign.css" />
                                     <Label layoutX="739.0" prefHeight="27.0" prefWidth="99.0" stylesheets="@../design/MainFormDesign.css" text="Addresse" textFill="#8a0085" underline="true">
                                        <font>
                                           <Font size="15.0" />
@@ -561,6 +564,7 @@
                                           <Font size="15.0" />
                                        </font>
                                     </Label>
+                                    <TextField fx:id="appointment_heure" layoutX="708.0" layoutY="155.0" prefHeight="26.0" prefWidth="189.0" promptText="choisir une heure" />
                                  </children>
                               </AnchorPane>
                            </children>

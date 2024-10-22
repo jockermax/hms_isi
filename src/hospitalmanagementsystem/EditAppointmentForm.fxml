@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1122.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospitalmanagementsystem.EditAppointmentFormController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1122.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospitalmanagementsystem.EditAppointmentFormController">
    <children>
       <AnchorPane prefHeight="556.0" prefWidth="1030.0">
          <children>
@@ -84,6 +84,7 @@
                   <ComboBox fx:id="editApp_specialized" layoutX="785.0" layoutY="327.0" prefHeight="31.0" prefWidth="271.0" promptText="Choisir..." styleClass="textfield-1" stylesheets="@../design/PageDesign.css" />
                   <DatePicker fx:id="editApp_schedule" layoutX="783.0" layoutY="415.0" prefHeight="31.0" prefWidth="271.0" />
                   <Label layoutX="721.0" layoutY="419.0" prefHeight="21.0" prefWidth="63.0" styleClass="shadow" text="Date :" textFill="WHITE" />
+                  <TextField fx:id="editApp_heure" layoutX="783.0" layoutY="458.0" prefHeight="31.0" prefWidth="271.0" promptText="Saisissez l'heure" styleClass="textfield-1" stylesheets="@../design/PageDesign.css" />
                </children>
             </AnchorPane>
          </children>

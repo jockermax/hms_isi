@@ -78,7 +78,7 @@ public class EditDoctorFormController implements Initializable {
     @FXML
     private Button editDoctor_cancelBtn;
 
-    private AlertMessage tray = new AlertMessage();
+    private final AlertMessage tray = new AlertMessage();
 
     private Image image;
     private Connection connect;
@@ -134,7 +134,7 @@ public class EditDoctorFormController implements Initializable {
                         path = path.replace("\\", "\\\\");
                         Path transfer = Paths.get(path);
 
-                        Path copy = Paths.get("C:\\Users\\DELL\\Documents\\NetBeansProjects\\yalla-pitie\\src\\Doctor_Directory\\"
+                        Path copy = Paths.get("C:\\dossier_prive\\hms_isi\\src\\Doctor_Directory\\"
                                 + editDoctor_doctorID.getText() + ".jpg");
 
                         Files.copy(transfer, copy, StandardCopyOption.REPLACE_EXISTING);

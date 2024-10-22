@@ -5,10 +5,12 @@
  */
 package hospitalmanagementsystem;
 
+import java.io.InputStream;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -27,7 +29,15 @@ public class HospitalManagementSystem extends Application {
         stage.setMinHeight(650);
         stage.setTitle("Gestion de Rendez vous hopital");
         stage.setScene(scene);
-     //   stage.getIcons().add(new Image(getClass().getResourceAsStream("image.jpeg")));
+
+        // stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/image.jpeg")));
+        InputStream iconStream = getClass().getResourceAsStream("/images/babette.png");
+        if (iconStream != null) {
+            stage.getIcons().add(new Image(iconStream));
+        } else {
+            System.out.println("L'image de l'icône est introuvable.");
+        }
+
         stage.show();
     }
 

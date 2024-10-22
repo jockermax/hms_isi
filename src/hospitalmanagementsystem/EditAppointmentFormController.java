@@ -8,13 +8,10 @@ package hospitalmanagementsystem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -74,8 +71,12 @@ public class EditAppointmentFormController implements Initializable {
 
     @FXML
     private ComboBox<String> editApp_status;
+
     @FXML
     private DatePicker editApp_schedule;
+
+    @FXML
+    private TextField editApp_heure;
 
     private Connection connect;
     private PreparedStatement prepare;

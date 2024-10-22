@@ -55,6 +55,20 @@ public class AppointmentData {
     }
 
     public AppointmentData(Integer appointmentID, String name, String gender,
+            Long mobileNumber, String description, String address,
+            String status, Date schedule) {
+
+        this.appointmentID = appointmentID;
+        this.name = name;
+        this.gender = gender;
+        this.mobileNumber = mobileNumber;
+        this.description = description;
+        this.address = address;
+        this.status = status;
+        this.schedule = schedule;
+    }
+
+    public AppointmentData(Integer appointmentID, String name, String gender,
             Long mobileNumber, String description, String diagnosis, String treatment, String address,
             Date date, Date dateModify, Date dateDelete, String status, Date schedule) {
 
@@ -82,15 +96,6 @@ public class AppointmentData {
         this.date = date;
         this.status = status;
     }
-    
-        public AppointmentData(Integer appointmentID, String name,
-             String gender , Long mobileNumber) {
-        this.appointmentID = appointmentID;
-        this.name = name;
-        this.description = description;
-        this.date = date;
-        this.status = status;
-    }
 
     public AppointmentData(Integer appointmentID, String description,
             String diagnosis, String treatment, String doctorID, Date schedule) {
@@ -100,10 +105,6 @@ public class AppointmentData {
         this.treatment = treatment;
         this.doctorID = doctorID;
         this.schedule = schedule;
-    }
-
-    AppointmentData(Integer appointmentID, String name, String gender, String date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public Integer getId() {

@@ -12,7 +12,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -314,10 +314,10 @@ public class DoctorMainFormController implements Initializable {
     private Button profile_updateBtn;
 
     @FXML
-    private Button Btn_search_rv;
+    private Button appointmentSearchBtn;
 
     @FXML
-    private TextField search_rv;
+    private TextField appointments_searchField;
 
 //    DATABASE TOOLSs
     private Connection connect;
@@ -1257,7 +1257,8 @@ public class DoctorMainFormController implements Initializable {
     public void runTime() {
         new Thread() {
             public void run() {
-                SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+                // Utiliser Locale.FRENCH pour le formatage en français
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.FRENCH);
 
                 // Timeline pour le défilement
                 Timeline timeline = new Timeline(new KeyFrame(Duration.millis(500), event -> {
@@ -1271,11 +1272,11 @@ public class DoctorMainFormController implements Initializable {
 
                     // Reset du positionnement quand le texte est complètement sorti de l'écran
                     if (date_time.getTranslateX() < -width) {
-                        date_time.setTranslateX(1000); // Remplacez 800 par la largeur de votre fenêtre
+                        date_time.setTranslateX(1000); // Remplacez 1000 par la largeur de votre fenêtre
                     }
                 }));
 
-                // Démarre le Timeline pour qu'il s'exécute chaque seconde
+                // Démarre le Timeline pour qu'il s'exécute chaque demi-seconde (500 ms)
                 timeline.setCycleCount(Timeline.INDEFINITE);
                 timeline.play();
 
@@ -1289,6 +1290,165 @@ public class DoctorMainFormController implements Initializable {
                 }
             }
         }.start();
+    }
+
+// Méthode pour charger tous les rendez-vous après la recherche ou réinitialisation
+    public void loadAllAppointments() {
+        String sql = "SELECT * FROM appointment WHERE doctor = '" + Data.doctor_id + "'";
+
+        connect = Database.connectDB();
+        ObservableList<AppointmentData> allData = FXCollections.observableArrayList();
+
+        try {
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            while (result.next()) {
+                AppointmentData appointment = new AppointmentData(
+                        result.getInt("appointment_id"),
+                        result.getString("name"),
+                        result.getString("gender"),
+                        result.getLong("mobile_number"),
+                        result.getString("description"),
+                        result.getString("address"),
+                        result.getString("status"),
+                        result.getDate("schedule")
+                );
+                allData.add(appointment);
+            }
+
+            appointments_tableView.setItems(allData); // Réinitialiser la table avec toutes les données
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (prepare != null) {
+                    prepare.close();
+                }
+                if (connect != null) {
+                    connect.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public void filterAppointments() {
+        String searchTerm = appointments_searchField.getText().trim();
+        String filterBy = ""; // Initialize filterBy string
+
+        // Check which filter options are selected
+        if (!searchTerm.isEmpty()) {
+            filterBy += " (name LIKE '%" + searchTerm + "%' OR mobile_number LIKE '%" + searchTerm + "%')";
+        }
+
+        if (appointments_status.getSelectionModel().getSelectedItem() != null) {
+            String selectedStatus = appointments_status.getSelectionModel().getSelectedItem();
+            if (!filterBy.isEmpty()) {
+                filterBy += " AND ";
+            }
+            filterBy += " status = '" + selectedStatus + "'";
+        }
+
+        // Add filtering by date
+        if (appoinment_schedule.getValue() != null) {
+            java.sql.Date selectedDate = java.sql.Date.valueOf(appoinment_schedule.getValue());
+            if (!filterBy.isEmpty()) {
+                filterBy += " AND ";
+            }
+            filterBy += " schedule = '" + selectedDate + "'";
+        }
+
+        // Build the final query with filtering conditions
+        String sql = "SELECT * FROM appointment WHERE doctor = '" + Data.doctor_id + "'";
+        if (!filterBy.isEmpty()) {
+            sql += " AND " + filterBy;
+        }
+
+        ObservableList<AppointmentData> filteredData = FXCollections.observableArrayList();
+
+        connect = Database.connectDB();
+        try {
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            AppointmentData aData;
+            while (result.next()) {
+                aData = new AppointmentData(
+                        result.getInt("appointment_id"),
+                        result.getString("name"),
+                        result.getString("gender"),
+                        result.getLong("mobile_number"),
+                        result.getString("description"),
+                        result.getString("address"),
+                        result.getString("status"),
+                        result.getDate("schedule")
+                );
+                filteredData.add(aData);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Update the table view with filtered data
+        appointments_tableView.setItems(filteredData);
+
+        // Réinitialiser la table si aucun résultat n'est trouvé
+        if (filteredData.isEmpty()) {
+            loadAllAppointments();
+        }
+    }
+
+// Méthode pour charger tous les rendez-vous
+    public void loadAllAppointmentss() {
+        String sql = "SELECT * FROM appointment WHERE doctor = '" + Data.doctor_id + "'";
+
+        connect = Database.connectDB();
+        ObservableList<AppointmentData> allData = FXCollections.observableArrayList();
+
+        try {
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            while (result.next()) {
+                AppointmentData appointment = new AppointmentData(
+                        result.getInt("appointment_id"),
+                        result.getString("name"),
+                        result.getString("gender"),
+                        result.getLong("mobile_number"),
+                        result.getString("description"),
+                        result.getString("address"),
+                        result.getString("status"),
+                        result.getDate("schedule")
+                );
+                allData.add(appointment);
+            }
+
+            appointments_tableView.setItems(allData); // Réinitialiser la table avec toutes les données
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (prepare != null) {
+                    prepare.close();
+                }
+                if (connect != null) {
+                    connect.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
 //    private ObservableList<AppointmentData> appointmentListrv = FXCollections.observableArrayList();
@@ -1322,6 +1482,25 @@ public class DoctorMainFormController implements Initializable {
         profileFields(); // Pour afficher tous les details aux champs
         profileLabels();
         profileDisplayImages(); // POUR AFFICHER LA PHOTO DE PROFIL DU DOCTEUR
+
+        // recherche
+        // Ajouter un listener pour le champ de recherche
+        appointments_searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterAppointments(); // Appeler le filtrage dès que le texte change
+        });
+
+        // Ajouter un listener pour la sélection du statut (ComboBox)
+        appointments_status.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            filterAppointments(); // Appeler le filtrage dès que le statut change
+        });
+
+        // Ajouter un listener pour le DatePicker (appoinment_schedule)
+        appoinment_schedule.valueProperty().addListener((observable, oldValue, newValue) -> {
+            filterAppointments(); // Appeler le filtrage dès que la date change
+        });
+
+        // Charger tous les rendez-vous lors de l'initialisation
+        loadAllAppointments();
     }
 
 }

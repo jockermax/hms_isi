@@ -43,31 +43,31 @@
                               <Font size="19.0" />
                            </font>
                         </Label>
-                        <Circle fx:id="top_profile" fill="DODGERBLUE" layoutX="990.2" layoutY="30.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="94.79999999999995" />
+                        <Circle fx:id="top_profile" fill="DODGERBLUE" layoutX="997.2000000000002" layoutY="31.0" radius="21.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="95.0" />
                         <Label layoutX="1013.6000000000001" layoutY="20.0" prefHeight="18.0" prefWidth="42.0" text="Active" AnchorPane.rightAnchor="44.399999999999864" />
-                        <Circle fill="#1fff6d" layoutX="1072.0" layoutY="31.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="21.0" />
+                        <Circle fill="#1fff6d" layoutX="1081.4" layoutY="29.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="22.0" />
                         <Label layoutX="607.0" layoutY="18.0" prefHeight="25.0" prefWidth="92.0" text="Bienvenue ," AnchorPane.rightAnchor="408.0">
                            <font>
                               <Font size="16.0" />
                            </font></Label>
-                        <Label fx:id="date_time" layoutX="364.0" layoutY="16.0" prefHeight="30.0" prefWidth="220.0" text="       JJ:MM:AAAA" AnchorPane.leftAnchor="364.0">
+                        <Label fx:id="date_time" layoutX="364.0" layoutY="16.0" prefHeight="30.0" prefWidth="220.0" text="       JJ:MM:AAAA" textFill="WHITE" AnchorPane.leftAnchor="364.0">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                            <styleClass>
                               <String fx:value="table-view" />
-                              <String fx:value="white-bg" />
+                              <String fx:value="bg-color-1" />
                               <String fx:value="radius" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="top_username" layoutX="701.0" layoutY="19.0" prefHeight="23.0" prefWidth="144.0" text="Bamba" AnchorPane.rightAnchor="262.0">
+                        <Label fx:id="top_username" layoutX="701.0" layoutY="19.0" prefHeight="23.0" prefWidth="144.0" text="Bamba" textFill="WHITE" AnchorPane.rightAnchor="262.0">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                            <styleClass>
-                              <String fx:value="border-top" />
                               <String fx:value="white-bg" />
-                              <String fx:value="shadow" />
+                              <String fx:value="radius" />
+                              <String fx:value="bg-color-1" />
                            </styleClass>
                         </Label>
                      </children>
@@ -173,7 +173,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" stylesheets="@../design/MainFormDesign.css" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="dashboard_form" layoutY="102.0" prefHeight="638.4" prefWidth="922.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="dashboard_form" layoutY="102.0" prefHeight="638.4" prefWidth="922.4" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="3.0" layoutY="1.0" prefHeight="161.0" prefWidth="918.0" stylesheets="@../design/MainFormDesign.css" AnchorPane.leftAnchor="3.2000000000000455" AnchorPane.rightAnchor="4.2000000000000455" AnchorPane.topAnchor="1.0">
                                  <styleClass>
@@ -255,31 +255,31 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <AnchorPane layoutX="451.0" layoutY="3.2" prefHeight="218.0" prefWidth="431.0" stylesheets="@../design/MainFormDesign.css" AnchorPane.bottomAnchor="226.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="3.0">
+                                    <AnchorPane layoutX="451.0" layoutY="3.2" prefHeight="218.0" prefWidth="540.0" stylesheets="@../design/MainFormDesign.css" AnchorPane.bottomAnchor="227.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="3.0">
                                        <styleClass>
                                           <String fx:value="shadow" />
                                           <String fx:value="radius" />
                                           <String fx:value="white-bg" />
                                        </styleClass>
                                        <children>
-                                          <AreaChart fx:id="dashboad_chart_PD" layoutX="-106.0" layoutY="0.8" prefHeight="217.0" prefWidth="431.0" styleClass="bg-color-1" title="Donnees Patients" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
+                                          <AreaChart fx:id="dashboad_chart_PD" layoutX="-1.6" layoutY="0.8" prefHeight="209.0" prefWidth="542.0" styleClass="bg-color-1" title="Donnees Patients" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
                                             <xAxis>
                                               <CategoryAxis side="BOTTOM" />
                                             </xAxis>
                                             <yAxis>
-                                              <NumberAxis side="LEFT" />
+                                              <NumberAxis prefWidth="30.0" side="LEFT" />
                                             </yAxis>
                                           </AreaChart>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane layoutX="451.0" layoutY="230.0" prefHeight="215.0" prefWidth="431.0" stylesheets="@../design/MainFormDesign.css" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="6.0">
+                                    <AnchorPane layoutX="451.0" layoutY="230.0" prefHeight="215.0" prefWidth="540.0" stylesheets="@../design/MainFormDesign.css" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="6.0">
                                        <styleClass>
                                           <String fx:value="shadow" />
                                           <String fx:value="radius" />
                                           <String fx:value="white-bg" />
                                        </styleClass>
                                        <children>
-                                          <BarChart fx:id="dashboad_chart_DD" layoutX="-69.0" prefHeight="215.0" prefWidth="431.0" styleClass="bg-color-1" title="Donnees Docteurs" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <BarChart fx:id="dashboad_chart_DD" layoutX="0.8" layoutY="-4.8" prefHeight="220.0" prefWidth="539.0" styleClass="bg-color-1" title="Donnees Docteurs" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
                                             <xAxis>
                                               <CategoryAxis side="BOTTOM" />
                                             </xAxis>
@@ -289,16 +289,16 @@
                                           </BarChart>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane layoutX="2.0" layoutY="2.0" prefHeight="443.0" prefWidth="472.0" stylesheets="@../design/MainFormDesign.css" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.3999999999999204" AnchorPane.rightAnchor="440.3999999999999" AnchorPane.topAnchor="1.6000000000000227">
+                                    <AnchorPane layoutX="2.4" layoutY="0.8" prefHeight="446.0" prefWidth="362.0" stylesheets="@../design/MainFormDesign.css" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="552.0" AnchorPane.topAnchor="1.0">
                                        <styleClass>
                                           <String fx:value="shadow" />
                                           <String fx:value="radius" />
                                           <String fx:value="white-bg" />
                                        </styleClass>
                                        <children>
-                                          <TableView fx:id="dashboad_tableView" layoutX="2.0" layoutY="35.0" prefHeight="408.0" prefWidth="470.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
+                                          <TableView fx:id="dashboad_tableView" layoutX="2.0" layoutY="35.0" prefHeight="410.0" prefWidth="349.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="35.0">
                                             <columns>
-                                              <TableColumn fx:id="dashboad_col_doctorID" prefWidth="75.0" text="Doctor ID" />
+                                              <TableColumn fx:id="dashboad_col_doctorID" prefWidth="75.0" text="Matricule" />
                                               <TableColumn fx:id="dashboad_col_name" prefWidth="75.0" text="Nom" />
                                                 <TableColumn fx:id="dashboad_col_specialized" prefWidth="75.0" text="Specialite" />
                                                 <TableColumn fx:id="dashboad_col_status" prefWidth="75.0" text="Status" />
@@ -307,14 +307,17 @@
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                              </columnResizePolicy>
                                           </TableView>
-                                          <Label layoutX="2.0" layoutY="2.0" prefHeight="22.0" prefWidth="158.0" text="Doctor Information" />
+                                          <Label layoutX="13.0" layoutY="3.0" prefHeight="22.0" prefWidth="214.0" styleClass="header-1" text="   Information des Docteurs" textFill="#4b6699">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font></Label>
                                        </children>
                                     </AnchorPane>
                                  </children>
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="doctors_form" layoutX="154.0" layoutY="131.0" prefHeight="638.4" prefWidth="922.4" styleClass="white-bg" stylesheets="@../design/MainFormDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="doctors_form" layoutX="154.0" layoutY="131.0" prefHeight="638.4" prefWidth="922.4" styleClass="white-bg" stylesheets="@../design/MainFormDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Label layoutX="12.0" layoutY="5.0" prefHeight="27.0" prefWidth="114.0" styleClass="header-1" stylesheets="@../design/MainFormDesign.css" text="Docteurs">
                                  <font>
@@ -323,15 +326,17 @@
                               </Label>
                               <TableView fx:id="doctors_tableView" layoutX="9.0" layoutY="45.0" prefHeight="578.0" prefWidth="903.0" stylesheets="@../design/MainFormDesign.css" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="45.0">
                                 <columns>
-                                  <TableColumn fx:id="doctors_col_doctorID" prefWidth="89.0" text="ID Docteur" />
+                                  <TableColumn fx:id="doctors_col_doctorID" prefWidth="89.0" text="Matricule" />
                                   <TableColumn fx:id="doctors_col_name" prefWidth="66.0" text="Nom" />
                                     <TableColumn fx:id="doctors_col_gender" prefWidth="46.0" text="Sexe" />
                                     <TableColumn fx:id="doctors_col_contactNumber" prefWidth="87.0" text="Telephone" />
                                     <TableColumn fx:id="doctors_col_email" prefWidth="93.0" text="Email " />
                                     <TableColumn fx:id="doctors_col_specialization" prefWidth="115.0" text=" Specialisation" />
                                     <TableColumn fx:id="doctors_col_address" prefWidth="84.0" text="Addresse" />
-                                    <TableColumn fx:id="doctors_col_status" prefWidth="73.0" text="Status" />
-                                    <TableColumn fx:id="doctors_col_action" prefWidth="249.0" text="Action" />
+                                    <TableColumn fx:id="doctors_col_status" prefWidth="84.00006103515625" text="Status" />
+                                    <TableColumn fx:id="doctors_col_action" prefWidth="89.5999755859375" text="Action" />
+                                    <TableColumn fx:id="doctors_col_heure_debut" prefWidth="113.60003662109375" text="heure debut" />
+                                    <TableColumn fx:id="doctors_col_heure_fin" prefWidth="127.199951171875" text="heure fin" />
                                 </columns>
                                  <styleClass>
                                     <String fx:value="radius" />

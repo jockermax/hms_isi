@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="HospitalManagementSystem.jar" size="53934151" download="eager" />
+    <jar href="HospitalManagementSystem.jar" size="53811373" download="eager" />
     <jar href="lib\TrayNotification.jar" size="41019" download="eager" />
     <jar href="lib\mysql-connector-j-8.0.33.jar" size="2481560" download="eager" />
   </resources>

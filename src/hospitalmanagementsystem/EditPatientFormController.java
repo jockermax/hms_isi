@@ -102,8 +102,8 @@ public class EditPatientFormController implements Initializable {
                     tray.successMessages("MISE A JOUR REUSSIE!");
                 } else {
                     tray.errorMessages("ANNULLEE.");
-                     Stage stage = (Stage) edit_updateBtn.getScene().getWindow();
-                        stage.close();
+                    Stage stage = (Stage) edit_updateBtn.getScene().getWindow();
+                    stage.close();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
