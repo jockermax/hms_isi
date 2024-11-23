@@ -363,7 +363,7 @@ public class DoctoPageController implements Initializable {
                 e.printStackTrace();
             }
 
-        } else if (login_user.getSelectionModel().getSelectedItem() == "Patient portal") {
+        } else if (login_user.getSelectionModel().getSelectedItem() == "Secretaire portal") {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("PatientPage.fxml"));
                 Stage stage = new Stage();

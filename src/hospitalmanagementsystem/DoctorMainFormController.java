@@ -31,11 +31,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.print.PrinterJob;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -47,8 +50,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -104,6 +109,9 @@ public class DoctorMainFormController implements Initializable {
 
     @FXML
     private TableColumn<AppointmentData, String> appointments_col_status;
+
+    @FXML
+    private TableColumn<AppointmentData, String> appointments_col_heure;
 
     @FXML
     private TextField appointments_description;
@@ -311,6 +319,9 @@ public class DoctorMainFormController implements Initializable {
     private ComboBox<String> profile_status;
 
     @FXML
+    private ComboBox<String> appoinment_heure;
+
+    @FXML
     private Button profile_updateBtn;
 
     @FXML
@@ -318,6 +329,9 @@ public class DoctorMainFormController implements Initializable {
 
     @FXML
     private TextField appointments_searchField;
+
+    @FXML
+    private Button printAppointmentsBtn;
 
 //    DATABASE TOOLSs
     private Connection connect;
@@ -329,11 +343,6 @@ public class DoctorMainFormController implements Initializable {
     private final AlertMessage tray = new AlertMessage();
     private Integer appointmentID;
 
-//    ObservableList<AppointmentData> seachrvModelObservableList = FXCollections.observableArrayList();
-//  
-//    public void searchRv() {
-//       
-//    }
     public void dashboardDisplayIP() {
         String sql = "SELECT COUNT(id) FROM patient WHERE status = 'Inactive' AND doctor = '"
                 + Data.doctor_id + "'";
@@ -639,44 +648,82 @@ public class DoctorMainFormController implements Initializable {
     //BUTTON DE MODIFICATION DE TOUS LES CHAMPS
     public void appointmentUpdateBtn() {
 
-        if (appointments_appointmentID.getText().isEmpty()
-                || appointments_name.getText().isEmpty()
-                || appointments_gender.getSelectionModel().getSelectedItem() == null
-                || appointments_mobileNumber.getText().isEmpty()
-                || appointments_description.getText().isEmpty()
-                || appointments_address.getText().isEmpty()
-                || appointments_status.getSelectionModel().getSelectedItem() == null
-                || appoinment_schedule.getValue() == null) {
-            tray.errorMessages(" VEUILEZ REMPLIR TOUS LES CHAMPS VIDES ");
+        connect = Database.connectDB();
+
+        if (profile_doctorID.getText().isEmpty()
+                || profile_name.getText().isEmpty()
+                || profile_email.getText().isEmpty()
+                || profile_gender.getSelectionModel().getSelectedItem() == null
+                || profile_mobileNumber.getText().isEmpty()
+                || profile_address.getText().isEmpty()
+                || profile_specialized.getSelectionModel().getSelectedItem() == null
+                || profile_status.getSelectionModel().getSelectedItem() == null) {
+            tray.errorMessages("Please fill all blank fields");
         } else {
-            // TO GET THE DATE TODAY
-            java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
-
-            String updateData = "UPDATE appointment SET name = '" + appointments_name.getText()
-                    + "', gender = '" + appointments_gender.getSelectionModel().getSelectedItem()
-                    + "', mobile_number = '" + appointments_mobileNumber.getText()
-                    + "', description = '" + appointments_description.getText()
-                    + "', address = '" + appointments_address.getText()
-                    + "', status = '" + appointments_status.getSelectionModel().getSelectedItem()
-                    + "', schedule = '" + appoinment_schedule.getValue()
-                    + "', date_modify = '" + sqlDate + "' WHERE appointment_id = '"
-                    + appointments_appointmentID.getText() + "'";
-
-            connect = Database.connectDB();
-
-            try {
-                if (tray.confirmMessage(" ÊTES-VOUS SUR DE VOULOIR MODIFIER CE RENDEZ-VOUS : "
-                        + appointments_appointmentID.getText() + " ? ")) {
+            // CHECK IF THE PATH IS NULL 
+            if (Data.path == null || "".equals(Data.path)) {
+                String updateData = "UPDATE doctor SET full_name = ?, email = ?"
+                        + ", gender = ?, mobile_number = ?, address = ?, specialized = ?, status = ?, modify_date = ?"
+                        + " WHERE doctor_id = '"
+                        + Data.doctor_id + "'";
+                try {
+                    Date date = new Date();
+                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
                     prepare = connect.prepareStatement(updateData);
+                    prepare.setString(1, profile_name.getText());
+                    prepare.setString(2, profile_email.getText());
+                    prepare.setString(3, profile_gender.getSelectionModel().getSelectedItem());
+                    prepare.setString(4, profile_mobileNumber.getText());
+                    prepare.setString(5, profile_address.getText());
+                    prepare.setString(6, profile_specialized.getSelectionModel().getSelectedItem());
+                    prepare.setString(7, profile_status.getSelectionModel().getSelectedItem());
+                    prepare.setString(8, String.valueOf(sqlDate));
+
                     prepare.executeUpdate();
 
-                    appointmentShowData();
-                    appointmentAppointmentID();
-                    appointmentClearBtn();
-                    tray.successMessages("MISE A JOUR RÉUSSIE!");
+                    tray.successMessages("Updated Successfully!");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } else {
+                String updateData = "UPDATE doctor SET full_name = ?, email = ?"
+                        + ", gender = ?, mobile_number = ?, address = ?, image = ?, specialized = ?, status = ?, modify_date = ?"
+                        + " WHERE doctor_id = '"
+                        + Data.doctor_id + "'";
+                try {
+                    Date date = new Date();
+                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                    prepare = connect.prepareStatement(updateData);
+                    prepare.setString(1, profile_name.getText());
+                    prepare.setString(2, profile_email.getText());
+                    prepare.setString(3, profile_gender.getSelectionModel().getSelectedItem());
+                    prepare.setString(4, profile_mobileNumber.getText());
+                    prepare.setString(5, profile_address.getText());
+                    String path = Data.path;
+                    path = path.replace("\\", "\\\\");
+                    Path transfer = Paths.get(path);
+
+                    // LINK YOUR DIRECTORY FOLDER
+                    Path copy = Paths.get("C:\\Users\\WINDOWS 10\\Documents\\NetBeansProjects\\HospitalManagementSystem\\src\\Directory\\"
+                            + Data.doctor_id + ".jpg");
+
+                    try {
+                        // TO PUT THE IMAGE FILE TO YOUR DIRECTORY FOLDER
+                        Files.copy(transfer, copy, StandardCopyOption.REPLACE_EXISTING);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    prepare.setString(6, copy.toAbsolutePath().toString());
+                    prepare.setString(7, profile_specialized.getSelectionModel().getSelectedItem());
+                    prepare.setString(8, profile_status.getSelectionModel().getSelectedItem());
+                    prepare.setString(9, String.valueOf(sqlDate));
+
+                    prepare.executeUpdate();
+
+                    tray.successMessages("Updated Successfully!");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -785,7 +832,7 @@ public class DoctorMainFormController implements Initializable {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+                /*e.printStackTrace();*/
             }
         }
 
@@ -893,9 +940,6 @@ public class DoctorMainFormController implements Initializable {
 
             while (result.next()) {
 
-//                Integer appointmentID, String name, String gender,
-//            Long mobileNumber, String description, String diagnosis, String treatment, String address,
-//            Date date, Date dateModify, Date dateDelete, String status, Date schedule
                 appData = new AppointmentData(result.getInt("id"), result.getInt("appointment_id"),
                         result.getString("name"), result.getString("gender"), result.getLong("mobile_number"),
                         result.getString("description"), result.getString("diagnosis"),
@@ -918,20 +962,21 @@ public class DoctorMainFormController implements Initializable {
 
     public void appointmentShowData() {
         appoinmentListData = AppointmentGetData();
+
         appointments_col_appointmentID.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         appointments_col_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         appointments_col_gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
-        appointments_col_description.setCellValueFactory(new PropertyValueFactory<>("description"));
         appointments_col_contactNumber.setCellValueFactory(new PropertyValueFactory<>("mobileNumber"));
+        appointments_col_description.setCellValueFactory(new PropertyValueFactory<>("description"));
         appointments_col_date.setCellValueFactory(new PropertyValueFactory<>("date"));
         appointments_col_dateModify.setCellValueFactory(new PropertyValueFactory<>("dateModify"));
         appointments_col_dateDelete.setCellValueFactory(new PropertyValueFactory<>("dateDelete"));
         appointments_col_status.setCellValueFactory(new PropertyValueFactory<>("status"));
+
         appointments_tableView.setItems(appoinmentListData);
     }
-// INSERTION D'UN IMAGE
 
-    //           Path copy = Paths.get("C:\\Users\\DELL\\Documents\\NetBeansProjects\\yalla-pitie\\src\\Directory\\"
+// INSERTION D'UN IMAGE
     public void profileUpdateBtn() {
 
         connect = Database.connectDB();
@@ -1013,36 +1058,6 @@ public class DoctorMainFormController implements Initializable {
         }
     }
 
-//    public void profileDisplayImages() {
-//
-//        String selectData = "SELECT * FROM doctor WHERE doctor_id = '"
-//                + Data.doctor_id + "'";
-//        String temp_path1 = "";
-//        String temp_path2 = "";
-//        connect = Database.connectDB();
-//
-//        try {
-//            prepare = connect.prepareStatement(selectData);
-//            result = prepare.executeQuery();
-//
-//            if (result.next()) {
-//                temp_path1 = "File:" + result.getString("image");
-//                temp_path2 = "File:" + result.getString("image");
-//
-//                if (result.getString("image") != null) {
-//                    image = new Image(temp_path1, 1012, 22, false, true);
-//                    top_profile.setFill(new ImagePattern(image));
-//
-//                    image = new Image(temp_path2, 128, 103, false, true);
-//                    profile_circleimage.setFill(new ImagePattern(image));
-//                }
-//
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
     public void profileDisplayImages() {
 
         String selectData = "SELECT * FROM doctor WHERE doctor_id = '"
@@ -1293,168 +1308,226 @@ public class DoctorMainFormController implements Initializable {
     }
 
 // Méthode pour charger tous les rendez-vous après la recherche ou réinitialisation
-    public void loadAllAppointments() {
-        String sql = "SELECT * FROM appointment WHERE doctor = '" + Data.doctor_id + "'";
-
-        connect = Database.connectDB();
-        ObservableList<AppointmentData> allData = FXCollections.observableArrayList();
-
-        try {
-            prepare = connect.prepareStatement(sql);
-            result = prepare.executeQuery();
-
-            while (result.next()) {
-                AppointmentData appointment = new AppointmentData(
-                        result.getInt("appointment_id"),
-                        result.getString("name"),
-                        result.getString("gender"),
-                        result.getLong("mobile_number"),
-                        result.getString("description"),
-                        result.getString("address"),
-                        result.getString("status"),
-                        result.getDate("schedule")
-                );
-                allData.add(appointment);
-            }
-
-            appointments_tableView.setItems(allData); // Réinitialiser la table avec toutes les données
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (result != null) {
-                    result.close();
-                }
-                if (prepare != null) {
-                    prepare.close();
-                }
-                if (connect != null) {
-                    connect.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-
-    public void filterAppointments() {
-        String searchTerm = appointments_searchField.getText().trim();
-        String filterBy = ""; // Initialize filterBy string
-
-        // Check which filter options are selected
-        if (!searchTerm.isEmpty()) {
-            filterBy += " (name LIKE '%" + searchTerm + "%' OR mobile_number LIKE '%" + searchTerm + "%')";
-        }
-
-        if (appointments_status.getSelectionModel().getSelectedItem() != null) {
-            String selectedStatus = appointments_status.getSelectionModel().getSelectedItem();
-            if (!filterBy.isEmpty()) {
-                filterBy += " AND ";
-            }
-            filterBy += " status = '" + selectedStatus + "'";
-        }
-
-        // Add filtering by date
-        if (appoinment_schedule.getValue() != null) {
-            java.sql.Date selectedDate = java.sql.Date.valueOf(appoinment_schedule.getValue());
-            if (!filterBy.isEmpty()) {
-                filterBy += " AND ";
-            }
-            filterBy += " schedule = '" + selectedDate + "'";
-        }
-
-        // Build the final query with filtering conditions
-        String sql = "SELECT * FROM appointment WHERE doctor = '" + Data.doctor_id + "'";
-        if (!filterBy.isEmpty()) {
-            sql += " AND " + filterBy;
-        }
-
-        ObservableList<AppointmentData> filteredData = FXCollections.observableArrayList();
-
-        connect = Database.connectDB();
-        try {
-            prepare = connect.prepareStatement(sql);
-            result = prepare.executeQuery();
-
-            AppointmentData aData;
-            while (result.next()) {
-                aData = new AppointmentData(
-                        result.getInt("appointment_id"),
-                        result.getString("name"),
-                        result.getString("gender"),
-                        result.getLong("mobile_number"),
-                        result.getString("description"),
-                        result.getString("address"),
-                        result.getString("status"),
-                        result.getDate("schedule")
-                );
-                filteredData.add(aData);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Update the table view with filtered data
-        appointments_tableView.setItems(filteredData);
-
-        // Réinitialiser la table si aucun résultat n'est trouvé
-        if (filteredData.isEmpty()) {
-            loadAllAppointments();
-        }
-    }
-
-// Méthode pour charger tous les rendez-vous
-    public void loadAllAppointmentss() {
-        String sql = "SELECT * FROM appointment WHERE doctor = '" + Data.doctor_id + "'";
-
-        connect = Database.connectDB();
-        ObservableList<AppointmentData> allData = FXCollections.observableArrayList();
-
-        try {
-            prepare = connect.prepareStatement(sql);
-            result = prepare.executeQuery();
-
-            while (result.next()) {
-                AppointmentData appointment = new AppointmentData(
-                        result.getInt("appointment_id"),
-                        result.getString("name"),
-                        result.getString("gender"),
-                        result.getLong("mobile_number"),
-                        result.getString("description"),
-                        result.getString("address"),
-                        result.getString("status"),
-                        result.getDate("schedule")
-                );
-                allData.add(appointment);
-            }
-
-            appointments_tableView.setItems(allData); // Réinitialiser la table avec toutes les données
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (result != null) {
-                    result.close();
-                }
-                if (prepare != null) {
-                    prepare.close();
-                }
-                if (connect != null) {
-                    connect.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-
+//    public void loadAllAppointments() {
+//        String sql = "SELECT * FROM appointment WHERE doctor = '" + Data.doctor_id + "'";
+//
+//        connect = Database.connectDB();
+//        ObservableList<AppointmentData> allData = FXCollections.observableArrayList();
+//
+//        try {
+//            prepare = connect.prepareStatement(sql);
+//            result = prepare.executeQuery();
+//
+//            while (result.next()) {
+//                AppointmentData appointment = new AppointmentData(
+//                        result.getInt("appointment_id"),
+//                        result.getString("name"),
+//                        result.getString("gender"),
+//                        result.getLong("mobile_number"),
+//                        result.getString("description"),
+//                        result.getString("address"),
+//                        result.getString("status"),
+//                        result.getDate("schedule")
+//                );
+//                allData.add(appointment);
+//            }
+//
+//            appointments_tableView.setItems(allData); // Réinitialiser la table avec toutes les données
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                if (result != null) {
+//                    result.close();
+//                }
+//                if (prepare != null) {
+//                    prepare.close();
+//                }
+//                if (connect != null) {
+//                    connect.close();
+//                }
+//            } catch (SQLException ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+//    }
+//    public void filterAppointments() {
+//        String searchTerm = appointments_searchField.getText().trim();
+//        String filterBy = ""; // Initialize filterBy string
+//
+//        // Check which filter options are selected
+//        if (!searchTerm.isEmpty()) {
+//            filterBy += " (name LIKE '%" + searchTerm + "%' OR mobile_number LIKE '%" + searchTerm + "%')";
+//        }
+//
+//        if (appointments_status.getSelectionModel().getSelectedItem() != null) {
+//            String selectedStatus = appointments_status.getSelectionModel().getSelectedItem();
+//            if (!filterBy.isEmpty()) {
+//                filterBy += " AND ";
+//            }
+//            filterBy += " status = '" + selectedStatus + "'";
+//        }
+//
+//        // Add filtering by date
+//        if (appoinment_schedule.getValue() != null) {
+//            java.sql.Date selectedDate = java.sql.Date.valueOf(appoinment_schedule.getValue());
+//            if (!filterBy.isEmpty()) {
+//                filterBy += " AND ";
+//            }
+//            filterBy += " schedule = '" + selectedDate + "'";
+//        }
+//
+//        // Build the final query with filtering conditions
+//        String sql = "SELECT * FROM appointment WHERE doctor = '" + Data.doctor_id + "'";
+//        if (!filterBy.isEmpty()) {
+//            sql += " AND " + filterBy;
+//        }
+//
+//        ObservableList<AppointmentData> filteredData = FXCollections.observableArrayList();
+//
+//        connect = Database.connectDB();
+//        try {
+//            prepare = connect.prepareStatement(sql);
+//            result = prepare.executeQuery();
+//
+//            AppointmentData aData;
+//            while (result.next()) {
+//                aData = new AppointmentData(
+//                        result.getInt("appointment_id"),
+//                        result.getString("name"),
+//                        result.getString("gender"),
+//                        result.getLong("mobile_number"),
+//                        result.getString("description"),
+//                        result.getString("address"),
+//                        result.getString("status"),
+//                        result.getDate("schedule")
+//                );
+//                filteredData.add(aData);
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        // Update the table view with filtered data
+//        appointments_tableView.setItems(filteredData);
+//
+//        // Réinitialiser la table si aucun résultat n'est trouvé
+//        if (filteredData.isEmpty()) {
+//            loadAllAppointments();
+//        }
+//    }
+//
+//// Méthode pour charger tous les rendez-vous
+//    public void loadAllAppointmentss() {
+//        String sql = "SELECT * FROM appointment WHERE doctor = '" + Data.doctor_id + "'";
+//
+//        connect = Database.connectDB();
+//        ObservableList<AppointmentData> allData = FXCollections.observableArrayList();
+//
+//        try {
+//            prepare = connect.prepareStatement(sql);
+//            result = prepare.executeQuery();
+//
+//            while (result.next()) {
+//                AppointmentData appointment = new AppointmentData(
+//                        result.getInt("appointment_id"),
+//                        result.getString("name"),
+//                        result.getString("gender"),
+//                        result.getLong("mobile_number"),
+//                        result.getString("description"),
+//                        result.getString("address"),
+//                        result.getString("status"),
+//                        result.getDate("schedule")
+//                );
+//                allData.add(appointment);
+//            }
+//
+//            appointments_tableView.setItems(allData); // Réinitialiser la table avec toutes les données
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                if (result != null) {
+//                    result.close();
+//                }
+//                if (prepare != null) {
+//                    prepare.close();
+//                }
+//                if (connect != null) {
+//                    connect.close();
+//                }
+//            } catch (SQLException ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+//    }
 //    private ObservableList<AppointmentData> appointmentListrv = FXCollections.observableArrayList();
 //    private FilteredList<AppointmentData> filteredAppointments;
+    private void initializeAppointmentHours() {
+        // Define time slots for the ComboBox
+        ObservableList<String> timeSlots = FXCollections.observableArrayList(
+                "09:00-13:00",
+                "13:00-17:00",
+                "17:00-21:00",
+                "17:00-21:00",
+                "17:00-21:00"
+        // Add more time slots as needed
+        );
+        // Set items to the ComboBox
+        appoinment_heure.setItems(timeSlots);
+    }
+
+    ///IMPRIMANTE
+    public void printAppointments() {
+        // Créer un PrinterJob
+        PrinterJob printerJob = PrinterJob.createPrinterJob();
+        if (printerJob != null && printerJob.showPrintDialog(appointments_tableView.getScene().getWindow())) {
+            // Créer un noeud pour l'impression
+            VBox vbox = new VBox();
+            vbox.setSpacing(10);
+
+            // Ajouter un titre à la page
+            Label titleLabel = new Label("Liste des rendez-vous");
+            titleLabel.setFont(new Font("Arial", 18));
+            vbox.getChildren().add(titleLabel);
+
+            // Ajouter les données de la table des rendez-vous
+            for (AppointmentData appData : appointments_tableView.getItems()) {
+                String appointmentDetails = String.format(
+                        "ID: %d, Nom: %s, Date: %s, Statut: %s, Description: %s",
+                        appData.getAppointmentID(),
+                        appData.getName(),
+                        appData.getDate(),
+                        //                appData.getHeure(),
+                        appData.getStatus(),
+                        appData.getDescription()
+                );
+
+                Label appointmentLabel = new Label(appointmentDetails);
+                appointmentLabel.setFont(new Font("Arial", 12));
+                vbox.getChildren().add(appointmentLabel);
+            }
+
+            // Imprimer le contenu
+            vbox.setPrefWidth(600);  // ajustez la largeur si nécessaire
+            boolean printed = printerJob.printPage(vbox);
+
+            if (printed) {
+                printerJob.endJob(); // Fin de l'impression
+                tray.successMessages("Rendez-vous imprimés avec succès !");
+            } else {
+                tray.errorMessages("Échec de l'impression.");
+            }
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        initializeAppointmentHours();
 
         displayAdminIdNumberName();
         runTime();
@@ -1483,26 +1556,25 @@ public class DoctorMainFormController implements Initializable {
         profileLabels();
         profileDisplayImages(); // POUR AFFICHER LA PHOTO DE PROFIL DU DOCTEUR
 
+        printAppointmentsBtn.setOnAction(event -> printAppointments());
         // recherche
         // Ajouter un listener pour le champ de recherche
-        appointments_searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filterAppointments(); // Appeler le filtrage dès que le texte change
-        });
-
-        // Ajouter un listener pour la sélection du statut (ComboBox)
-        appointments_status.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-            filterAppointments(); // Appeler le filtrage dès que le statut change
-        });
-
-        // Ajouter un listener pour le DatePicker (appoinment_schedule)
-        appoinment_schedule.valueProperty().addListener((observable, oldValue, newValue) -> {
-            filterAppointments(); // Appeler le filtrage dès que la date change
-        });
-
-        // Charger tous les rendez-vous lors de l'initialisation
-        loadAllAppointments();
+//        appointments_searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+//            filterAppointments(); // Appeler le filtrage dès que le texte change
+//        });
+//
+//        // Ajouter un listener pour la sélection du statut (ComboBox)
+//        appointments_status.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+//            filterAppointments(); // Appeler le filtrage dès que le statut change
+//        });
+//
+//        // Ajouter un listener pour le DatePicker (appoinment_schedule)
+//        appoinment_schedule.valueProperty().addListener((observable, oldValue, newValue) -> {
+//            filterAppointments(); // Appeler le filtrage dès que la date change
+//        });
+//
+//        // Charger tous les rendez-vous lors de l'initialisation
+//        loadAllAppointments();
+//    }
     }
-
 }
-////////////////
-

@@ -5,11 +5,9 @@
  */
 package hospitalmanagementsystem;
 
-import java.util.Optional;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javax.management.Notification;
 import javafx.util.Duration;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
@@ -21,7 +19,6 @@ import tray.notification.TrayNotification;
 public class AlertMessage {
 
     private Alert alert;
-    //  private Tray tray;
 
     public void errorMessages(String message) {
         NotificationType type = NotificationType.ERROR;
@@ -41,15 +38,6 @@ public class AlertMessage {
         tray.setNotificationType(type);
         tray.showAndDismiss(Duration.seconds(2));
     }
-//
-//    public void confirmationMessage(String message) {
-//    NotificationType type = NotificationType.CONFIRMATION;
-//    TrayNotification tray = new TrayNotification();
-//    tray.setTitle("Confirmation");
-//    tray.setMessage(message);
-//    tray.setNotificationType(type);
-//    tray.showAndWait();// attend que l'utilisateur confirme ou annule
-//    }
 
     public boolean confirmMessage(String message) {
         alert = new Alert(AlertType.CONFIRMATION);
@@ -57,9 +45,7 @@ public class AlertMessage {
         alert.showAndWait();
         alert.setContentText(message);
         alert.setHeaderText(null);
-      //  Optional<ButtonType> option = alert.showAndWait();
         return alert.getResult() == ButtonType.OK;
-        //  return option.get().equals(ButtonType.OK);
 
     }
 

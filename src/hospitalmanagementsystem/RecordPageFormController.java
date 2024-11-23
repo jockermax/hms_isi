@@ -82,9 +82,6 @@ public class RecordPageFormController implements Initializable {
 
     private final AlertMessage tray = new AlertMessage();
 
-//    public RecordPageFormController(TextField recordpageSearch) {
-//        recordpage_search = recordpageSearch;
-//    }
     public ObservableList<PatientsData> getPatientRecordData() {
 
         ObservableList<PatientsData> listData = FXCollections.observableArrayList();
@@ -98,9 +95,7 @@ public class RecordPageFormController implements Initializable {
             result = prepare.executeQuery();
 
             PatientsData pData;
-//            PatientsData(Integer id, Integer patientID, String fullName, 
-//            Long mobileNumber, String address, Date date
-//            , Date dateModify, Date dateDelete)
+
             while (result.next()) {
                 pData = new PatientsData(result.getInt("id"), result.getInt("patient_id"),
                         result.getString("full_name"), result.getString("gender"), result.getLong("mobile_number"),

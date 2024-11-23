@@ -26,7 +26,11 @@ public class Data {
 
     public static String[] status = {"Active", "Inactive", "Confirmez"};
 
-    public static String[] specialization = {"Allergologue", "Endocrinologue", "Dermatologue", "Gastro-entérologue", "Néphrologue", "Neurologue", "Oncologue", "Infectiologue", "Ophthalmologue", "Urologue", "Chirurgien", "Gynecologue", "ORL", "Pneumologues", "Psychiatres", "Cardiologue", "Generaliste", "Pediatre",};
+    public static String[] heureDebut = {"09H ", "10H", "11H", "12H", "13H", "14H", "15H", "16H", "17H" ,"18H", "19H", "20H"};
+
+    public static String[] heureSortie = {"09H", "10H", "11H", "12H", "13H", "14H", "15H", "16H", "17H", "18H", "19H", "20H"};
+
+    public static String[] specialization = {"Generaliste", "Allergologue", "Endocrinologue", "Dermatologue", "Gastro-entérologue", "Néphrologue", "Neurologue", "Oncologue", "Infectiologue", "Ophthalmologue", "Urologue", "Chirurgien", "Gynecologue", "ORL", "Pneumologues", "Psychiatres", "Cardiologue", "Generaliste", "Pediatre",};
 
     public static Integer temp_PatientID;
     public static String temp_name;

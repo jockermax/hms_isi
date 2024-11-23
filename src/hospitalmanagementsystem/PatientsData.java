@@ -32,9 +32,9 @@ public class PatientsData {
     private String status;
 
     public PatientsData(Integer id, Integer patientID, String password, String fullName, Long mobileNumber,
-             String gender, String address, String image, String description, String diagnosis, String treatment,
-             String doctor, String specialized, Date date, Date dateModify,
-             Date dateDelete, String status) {
+            String gender, String address, String image, String description, String diagnosis, String treatment,
+            String doctor, String specialized, Date date, Date dateModify,
+            Date dateDelete, String status) {
         this.id = id;
         this.patientID = patientID;
         this.password = password;
@@ -56,7 +56,7 @@ public class PatientsData {
 
     public PatientsData(Integer id, Integer patientID, String fullName, String gender,
             Long mobileNumber, String address, String status, Date date,
-             Date dateModify, Date dateDelete) {
+            Date dateModify, Date dateDelete) {
         this.id = id;
         this.patientID = patientID;
         this.fullName = fullName;
@@ -70,8 +70,8 @@ public class PatientsData {
     }
 
     public PatientsData(Integer id, Integer patientID, String fullName, String gender,
-             String description, String diagnosis, String treatment,
-             String doctor, String image, Date date) {
+            String description, String diagnosis, String treatment,
+            String doctor, String image, Date date) {
         this.id = id;
         this.patientID = patientID;
         this.fullName = fullName;
@@ -85,7 +85,7 @@ public class PatientsData {
     }
 
     public PatientsData(Integer id, Integer patientID, String description,
-             String diagnosis, String treatment, Date date) {
+            String diagnosis, String treatment, Date date) {
         this.id = id;
         this.patientID = patientID;
         this.description = description;

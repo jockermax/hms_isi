@@ -53,6 +53,8 @@ public class AppointmentData {
         this.schedule = schedule;
 
     }
+    
+    
 
     public AppointmentData(Integer appointmentID, String name, String gender,
             Long mobileNumber, String description, String address,
